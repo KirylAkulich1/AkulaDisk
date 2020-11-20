@@ -10,5 +10,6 @@ namespace Domain.Interfaces
         void AddRequest(string SharedId,AddRequest req);
         SharedFolder GetFolderById(string SharedId);
         IEnumerable<AddRequest> GetRelatedRequests(string SharedId);
+        
     }
 }

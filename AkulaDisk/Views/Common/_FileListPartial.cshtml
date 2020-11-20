@@ -11,7 +11,7 @@
                     <i class="fa fa-folder"></i>
                     <partial name="_RefPartial" model="file" /><h6>@file.File.Path</h6>
                      <div class="pull-right">
-                            <a class="fa fa-plus" asp-controller="Request" asp-action="" asp-route-path=@ViewBag.CurrentPath asp-route-folderId=@file.Id></a>
+                            <a class="fa fa-plus" asp-controller="Request" asp-action="FolderRequest"  asp-route-fileId=@file.Id></a>
                        
                      </div>
 

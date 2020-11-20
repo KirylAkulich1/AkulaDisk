@@ -39,7 +39,7 @@ namespace Infrastructure.Repositories
 
         public ApplicationUser GetUserByName(string UserName)
         {
-            return db.Users.Include(p => p.Files).First(p=>p.UserName==UserName);
+            return db.Users.Include(p => p.Files).Include(p=>p.OwnShared).First(p=>p.UserName==UserName);
         }
        
 
@@ -79,6 +79,23 @@ namespace Infrastructure.Repositories
         {
             var User = GetUserByNameWithIncome(UserName);
             return User.Income;
+        }
+
+        public void SaveChanges()
+        {
+            db.SaveChanges();
+        }
+
+        public void AddToIncomeRequuest(string UserName,AddRequest req)
+        {
+            var user = GetUserByNameWithIncome(UserName);
+            user.Income.Add(req);
+        }
+
+        public void AddToOutComeRequest(string UserName,AddRequest req)
+        {
+            var user = GetUserByNameWithSended(UserName);
+            user.Sended.Add(req);
         }
     }
 }

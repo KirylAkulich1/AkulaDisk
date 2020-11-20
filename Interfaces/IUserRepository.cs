@@ -17,6 +17,9 @@ namespace Domain.Interfaces
         IEnumerable<SharedFolder> GetShared(string Username);
         IEnumerable<AddRequest> GetSendedRequests(string UserName);
         IEnumerable<AddRequest> GetInputRequests(string UserName);
+        void SaveChanges();
+        void AddToIncomeRequuest(string userName,AddRequest req);
+        void AddToOutComeRequest(string userName,AddRequest req);
         
     }
 }

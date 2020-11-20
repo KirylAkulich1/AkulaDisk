@@ -21,13 +21,13 @@ namespace Infrastructure.Repositories
         {
             var folder = GetFolderById(SharedId);
             folder.Requests.Add(req);
-            db.SaveChanges();
         }
 
         public SharedFolder GetFolderById(string SharedId)
         {
             return db.SharedFolders
                 .Include(p=>p.Requests)
+                .ThenInclude(p=>p.ToUser)
                 .Include(p=>p.File)
                 .First(p=>p.Id == SharedId);
         }

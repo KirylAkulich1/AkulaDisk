@@ -25,6 +25,7 @@
 
     </tbody>
 </table>
-<form asp-controller="Request" asp-action="AddRequest" asp-route-folderId=@ViewBag.FolderId>
-
+<form method="post" asp-controller="Request" asp-action="AddRequest" asp-route-folderId=@ViewBag.FolderId>
+    <input name="userName" placeholder="Enter email" />
+    <button type="submit"></button>
 </form>

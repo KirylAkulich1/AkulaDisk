@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Domain.Core;
 using Domain.Interfaces;
 using Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -37,7 +38,12 @@ namespace AkulaDisk.Controllers
         [HttpPost]
         public IActionResult AddRequest(string folderId,string userName)
         {
-           
+            AddRequest request = new AddRequest();
+            request.Date = DateTime.Now;
+            _userRepo.AddToOutComeRequest(User.Identity.Name,request);
+            _userRepo.AddToIncomeRequuest(userName, request);
+            _sharedrepo.AddRequest(folderId, request);
+            _userRepo.SaveChanges();
             return RedirectToAction("FolderRequest",new { fileId=folderId});
         }
         public IActionResult Income()

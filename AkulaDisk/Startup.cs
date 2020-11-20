@@ -52,6 +52,9 @@ namespace AkulaDisk
             services.AddTransient<IFileProcessor, FileProcessor>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IFileRepository, FileRepository>();
+            services.AddScoped<IRequestRepository, RequestRepository>();
+            services.AddScoped<ISharedFolderRepository, SharedRepository>();
+            services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
             var builder = new ContainerBuilder();
             builder.Populate(services);
            
