@@ -1,0 +1,30 @@
+﻿
+@model IEnumerable<AddRequest>
+<table class="table">
+    <thead>
+        <tr>
+           
+            <th scope="col">To</th>
+            <th scope="col">Date</th>
+            <th scope="col">Yes</th>
+            <th scope="col">Del</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var request in Model)
+        {
+            <tr>
+
+                <td>@request.ToUser.UserName</td>
+                <td>@request.Date</td>
+                <td> <a class="fa fa-check"></a></td>
+                <td> <a class="fa fa-trash-o"></a></td>
+
+            </tr>
+        }
+
+    </tbody>
+</table>
+<form asp-controller="Request" asp-action="AddRequest" asp-route-folderId=@ViewBag.FolderId>
+
+</form>

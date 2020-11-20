@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
+
+<h2>Список ролей</h2>
+<table class="table">
+    @foreach (var role in Model)
+    {
+        <tr>
+            <td>@role.Name</td>
+            <td>
+                <form asp-action="Delete" asp-route-id="@role.Id" method="post">
+                    <button type="submit" class="btn btn-sm btn-danger">
+                        Удалить
+                    </button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+<a asp-action="Create">Добавить роль</a>
+<a asp-action="UserList">Список пользователей</a>
+<div class="file-wrapper">
+    <div class="container">
+        <h1>Upload a file</h1>
+        <div class="upload-container">
+            <div class="border-container">
+                <div class="icons fa-4x">
+                    <i class="fas fa-file-image" data-fa-transform="shrink-3 down-2 left-6 rotate--45"></i>
+                    <i class="fas fa-file-alt" data-fa-transform="shrink-2 up-4"></i>
+                    <i class="fas fa-file-pdf" data-fa-transform="shrink-3 down-2 right-6 rotate-45"></i>
+                </div>
+                <form asp-action="AddFile" asp-controller="Home" method="post" enctype="multipart/form-data">
+                    <input type="file" name="uploadedfile" />
+                    <input value=@ViewBag.CurrentPath name="Path" hidden />
+                    <input type="submit" value="Загрузить" />
+
+                </form>
+                <p>
+                    Drag and drop files here, or
+                    <a href="#" id="file-browser">browse</a> your computer.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

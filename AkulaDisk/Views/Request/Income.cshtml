@@ -1,0 +1,26 @@
+﻿@model IEnumerable<AddRequest>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Folder</th>
+            <th scope="col">Sender</th>
+            <th scope="col">Data</th>
+            <th scope="col">Yes</th>
+            <th scope="col">No</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var request in Model)
+        {
+        <tr>
+           
+            <td>@request.Name</td>
+            <td>@request.FromUser.UserName</td>
+            <td> <a class="fa fa-check" ></a></td>
+            <td> <a class="fa fa-ban"></a></td>
+
+        </tr>
+        }
+      
+    </tbody>
+</table>
