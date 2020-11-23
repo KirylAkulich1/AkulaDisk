@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using AkulaDisk.SignalR;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Domain.Core;
@@ -55,6 +56,13 @@ namespace AkulaDisk
             services.AddScoped<IRequestRepository, RequestRepository>();
             services.AddScoped<ISharedFolderRepository, SharedRepository>();
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
+            services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    options.ClientId = "155280292605-h7uvfng0ohd0uc4b6hb41mdljs14933p.apps.googleusercontent.com";
+                    options.ClientSecret = "_w-HL6Pn1h27BfbyUMMqlryA";
+                });
+            services.AddSignalR();
             var builder = new ContainerBuilder();
             builder.Populate(services);
            
@@ -92,6 +100,7 @@ namespace AkulaDisk
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+                endpoints.MapHub<RequestHub>("/chat");
             });
             
 

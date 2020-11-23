@@ -3,7 +3,7 @@
 <table class="table">
     <thead>
         <tr>
-           
+
             <th scope="col">To</th>
             <th scope="col">Date</th>
             <th scope="col">Yes</th>
@@ -29,3 +29,28 @@
     <input name="userName" placeholder="Enter email" />
     <button type="submit"></button>
 </form>
+<input type="button" id="sendBtn" value="Отправить" />
+<div id="chatroom"></div>
+<script src="~/js/microsoft/signalr/dist/browser/signalr.min.js">
+</script>
+<script>
+    const hubConnection = new signalR.HubConnectionBuilder()
+            .withUrl("/chat")
+            .build();
+
+        hubConnection.on("Send", function (data) {
+
+            let elem = document.createElement("p");
+            elem.appendChild(document.createTextNode(data));
+            let firstElem = document.getElementById("chatroom").firstChild;
+            document.getElementById("chatroom").insertBefore(elem, firstElem);
+
+        });
+
+        document.getElementById("sendBtn").addEventListener("click", function (e) {
+            let message = @User.Identity.Name;
+            hubConnection.invoke("Send", message);
+        });
+
+        hubConnection.start();
+</script>

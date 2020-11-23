@@ -17,13 +17,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Data", "Infrastructure.Data\Infrastructure.Data.csproj", "{33B1131D-495E-4649-94BD-69C75C1AD1B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Repositories", "Infrastructure.Repositories\Infrastructure.Repositories.csproj", "{8BF1D120-9D84-486B-B73B-E393589272E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Repositories", "Infrastructure.Repositories\Infrastructure.Repositories.csproj", "{8BF1D120-9D84-486B-B73B-E393589272E4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{5542DEA7-01E4-4DC2-83FD-36953EA34FD3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.Interfaces", "Services.Interfaces\Services.Interfaces.csproj", "{06313015-A440-4693-8AF1-9D595B12A323}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.Interfaces", "Services.Interfaces\Services.Interfaces.csproj", "{06313015-A440-4693-8AF1-9D595B12A323}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.Implementations", "Services.Implementations\Services.Implementations.csproj", "{1EB6C4AB-6F88-4626-BFF0-FCA60235CFF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.Implementations", "Services.Implementations\Services.Implementations.csproj", "{1EB6C4AB-6F88-4626-BFF0-FCA60235CFF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkulaDisk.Tests", "AkulaDisk.Tests\AkulaDisk.Tests.csproj", "{9D72B25B-CBAD-44A9-A2D2-EC17E587EABC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{1EB6C4AB-6F88-4626-BFF0-FCA60235CFF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EB6C4AB-6F88-4626-BFF0-FCA60235CFF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EB6C4AB-6F88-4626-BFF0-FCA60235CFF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D72B25B-CBAD-44A9-A2D2-EC17E587EABC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D72B25B-CBAD-44A9-A2D2-EC17E587EABC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D72B25B-CBAD-44A9-A2D2-EC17E587EABC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D72B25B-CBAD-44A9-A2D2-EC17E587EABC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

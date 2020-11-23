@@ -49,12 +49,13 @@ namespace AkulaDisk.Controllers
         public IActionResult Income()
         {
 
-
-            return View();
+            var requests=_userRepo.GetInputRequests(User.Identity.Name);
+            return View(requests);
         }
         public IActionResult Sended()
         {
-            return View();
+            var requests = _userRepo.GetSendedRequests(User.Identity.Name);
+            return View(requests);
         }
     }
 }

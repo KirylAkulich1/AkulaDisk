@@ -106,13 +106,10 @@
                     <a asp-controller="Common" asp-action=""><span class="fa fa-user mr-3"></span>My requests</a>
                 </li>
                 <li>
-                    <a href="#"><span class="fa fa-sticky-note mr-3"></span> Income Requests</a>
+                    <a asp-controller="Request" asp-action="Income"><span class="fa fa-sticky-note mr-3"></span> Income Requests</a>
                 </li>
                 <li>
-                    <a href="#"><span class="fa fa-sticky-note mr-3"></span>Requests</a>
-                </li>
-                <li>
-                    <a href="#"><span class="fa fa-paper-plane mr-3"></span>Settings</a>
+                    <a asp-controller="Request" asp-action="Sended"><span class="fa fa-sticky-note mr-3"></span>Sended Requests</a>
                 </li>
                 <li>
                     <a asp-controller="Common" asp-action="Index"><span class="fa fa-paper-plane mr-3"></span>Shared</a>
@@ -135,7 +132,7 @@
         </div>
     </div>
 
-
+    
 
 </body>
 </html>

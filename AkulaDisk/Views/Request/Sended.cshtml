@@ -1,5 +1,24 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model IEnumerable<AddRequest>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Folder</th>
+            <th scope="col">Sender</th>
+            <th scope="col">Data</th>
+            <th scope="col">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var request in Model)
+        {
+            <tr>
+
+                <td>@request.Name</td>
+                <td>@request.FromUser.UserName</td>
+                <td> <a class="fa fa-ban"></a></td>
+
+            </tr>
+        }
+
+    </tbody>
+</table>
