@@ -1,0 +1,27 @@
+
+name: Build and deploy ASP.NET Core with DotVVM app to Azure  
+  
+on:  
+  push:  
+    branches:  
+      - master  
+  
+jobs:  
+  build-and-deploy:  
+    runs-on: windows-latest  
+  
+    steps:  
+    - uses: actions/checkout@master  
+  
+    - name: Set up .NET Core  
+      uses: actions/setup-dotnet@v1  
+      with:  
+        dotnet-version: '3.1'  
+  
+    - name: Build with dotnet  
+      run: dotnet build --configuration Release  
+  
+    - name: dotnet publish  
+      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/AkulaDisk  
+  
+  
