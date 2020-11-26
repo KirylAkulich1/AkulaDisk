@@ -80,6 +80,11 @@ namespace AkulaDisk.Tests
             return user;
         }
 
+        public ApplicationUser GetUserWithOtherSharedFolders(string UserName)
+        {
+            throw new NotImplementedException();
+        }
+
         public void RemoveFile(string UserName, FileModel fm)
         {
            
