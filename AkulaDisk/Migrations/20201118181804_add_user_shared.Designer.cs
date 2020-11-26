@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AkulaDisk.Migrations
 {
-    [DbContext(typeof(ApplicatopnDbContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20201118181804_add_user_shared")]
     partial class add_user_shared
     {

@@ -11,8 +11,8 @@ namespace Infrastructure.Repositories
 {
     public class SharedRepository: ISharedFolderRepository
     {
-        private ApplicatopnDbContext db;
-        public SharedRepository(ApplicatopnDbContext _db)
+        private ApplicationDbContext db;
+        public SharedRepository(ApplicationDbContext _db)
         {
             db = _db;
         }
@@ -21,6 +21,12 @@ namespace Infrastructure.Repositories
         {
             var folder = GetFolderById(SharedId);
             folder.Requests.Add(req);
+        }
+
+        public void AddUser(ApplicationUser user, SharedFolder folder)
+        {
+            var sharedUser = new SharedUser { User = user,Folder=folder };
+            folder.Users.Add(sharedUser);
         }
 
         public SharedFolder GetFolderById(string SharedId)
@@ -36,6 +42,11 @@ namespace Infrastructure.Repositories
         {
             var folder = GetFolderById(FolderId);
             return folder.Requests;
+        }
+
+        public void SaveChanges()
+        {
+            db.SaveChanges();
         }
     }
 }

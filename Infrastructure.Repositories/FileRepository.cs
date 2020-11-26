@@ -9,9 +9,9 @@ namespace Infrastructure.Repositories
 {
     public class FileRepository : IFileRepository
     {
-        private ApplicatopnDbContext db;
+        private ApplicationDbContext db;
         private bool disposed = false;
-        public FileRepository(ApplicatopnDbContext ctx)
+        public FileRepository(ApplicationDbContext ctx)
         {
            db = ctx;
         }

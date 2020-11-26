@@ -15,7 +15,7 @@
 
                 <td>@request.Name</td>
                 <td>@request.FromUser.UserName</td>
-                <td> <a class="fa fa-ban"></a></td>
+                <td> <a asp-controller="Request" asp-action="Deny" asp-route-requestid=@request.Id class="fa fa-ban"></a></td>
 
             </tr>
         }

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AkulaDisk.Migrations
 {
-    [DbContext(typeof(ApplicatopnDbContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicatopnDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

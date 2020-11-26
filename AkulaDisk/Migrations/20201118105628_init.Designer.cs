@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AkulaDisk.Migrations
 {
-    [DbContext(typeof(ApplicatopnDbContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20201118105628_init")]
     partial class init
     {

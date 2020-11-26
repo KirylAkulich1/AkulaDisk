@@ -12,8 +12,8 @@ namespace Infrastructure.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private ApplicatopnDbContext db;
-        public UserRepository(ApplicatopnDbContext db)
+        private ApplicationDbContext db;
+        public UserRepository(ApplicationDbContext db)
         {
             this.db = db;
         }
@@ -96,6 +96,12 @@ namespace Infrastructure.Repositories
         {
             var user = GetUserByNameWithSended(UserName);
             user.Sended.Add(req);
+        }
+
+        public ApplicationUser GetUserWithOtherSharedFolders(string UserName)
+        {
+            var user = db.Users.Include(p => p.SharedFiles).ThenInclude(p => p.Folder).First(p => p.UserName == UserName);
+            return user;
         }
     }
 }

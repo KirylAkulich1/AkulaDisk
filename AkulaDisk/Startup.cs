@@ -40,16 +40,25 @@ namespace AkulaDisk
            
             services.AddControllersWithViews();
             services.AddRazorPages();
-            string connection = Configuration.GetConnectionString("AzureConnection");
-           services.AddDbContext<ApplicatopnDbContext>(options =>
+            string connection;
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
+            {
+                connection = Configuration.GetConnectionString("AzureConnection");
+            }
+            else
+            {
+                connection = Configuration.GetConnectionString("DefaultConnection");
+            }
+           services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connection, b => b.MigrationsAssembly("AkulaDisk")));
          //   services.AddDbContext<FileContext>(options =>
            //     options.UseSqlServer(connection, b => b.MigrationsAssembly("AkulaDisk")));
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddRoles<IdentityRole>()
-               .AddEntityFrameworkStores<ApplicatopnDbContext>();
+               .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddMvc();
-            services.BuildServiceProvider().GetService<ApplicatopnDbContext>().Database.Migrate();
+            services.AddTransient<IMailService, MailService>();
+            //services.BuildServiceProvider().GetService<ApplicatopnDbContext>().Database.Migrate();
             services.AddTransient<IFileProcessor, FileProcessor>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IFileRepository, FileRepository>();

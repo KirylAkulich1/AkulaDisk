@@ -8,12 +8,12 @@ using System.Text;
 
 namespace Infrastructure.Data
 {
-    public class ApplicatopnDbContext:IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext:IdentityDbContext<ApplicationUser>
     {
         public DbSet<FileModel> Files { get; set; }
         public DbSet<SharedFolder> SharedFolders { get; set; }
         public DbSet<AddRequest> AddRequests { get; set; }
-        public ApplicatopnDbContext(DbContextOptions<ApplicatopnDbContext> options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
            
