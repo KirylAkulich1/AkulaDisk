@@ -1,6 +1,6 @@
 ﻿
 @model IEnumerable<AddRequest>
-<table class="table">
+<table class="table" id="mytable">
     <thead>
         <tr>
 
@@ -26,7 +26,7 @@
     </tbody>
 </table>
 <form method="post" asp-controller="Request" asp-action="AddRequest" asp-route-folderId=@ViewBag.FolderId>
-    <input name="userName" placeholder="Enter email" />
+    <input name="userName" placeholder="Enter email" id="userName" />
     <button type="submit"></button>
 </form>
 <input type="button" id="sendBtn" value="Отправить" />
@@ -38,19 +38,36 @@
             .withUrl("/chat")
             .build();
 
-        hubConnection.on("Send", function (data) {
+    hubConnection.on("Recieve", function (data) {
 
-            let elem = document.createElement("p");
-            elem.appendChild(document.createTextNode(data));
-            let firstElem = document.getElementById("chatroom").firstChild;
-            document.getElementById("chatroom").insertBefore(elem, firstElem);
+        var table = document.getElementById("mytable");
+        var row = table.insertRow(1);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
 
+        cell2.innerHTML = addrequest.from;
+        cell1.innerHTML = addrequest.name;
+        cell3.innerHTML = "<td> <a href='Request/Accept?requestid = " + addrequest.request.toString() + " class='fa fa-check'></a></td>"
+        cell4.innerHTML = "<td> <a href='Request/Accept?requestid =" + toString(addrequest.toString() + " class='fa fa-ban'></a></td>"
         });
-
-        document.getElementById("sendBtn").addEventListener("click", function (e) {
-            let message = @User.Identity.Name;
-            hubConnection.invoke("Send", message);
-        });
+    document.getElementById("sendBtn").addEventListener("click", function (e) {
+        let userName = '@User.Identity.Name';
+        let ToUser = document.getElementById("userName").value;
+        let folderId = '@ViewBag.FolderId';
+        let folderName = '@ViewBag.FolderName';
+        hubConnection.invoke("Send", { "from": userName, "to": ToUser, "folder": folderId, "name": folderName });
+    });
+   // document.getElementById("sendBtn").addEventListener("click", function (e) {
+        //let userName = @User.Identity.Name;
+        //let ToUser = document.getElementById("userName").value;
+        //let folderId = @ViewBag.FolderId;
+        //let folderName =@ViewBag.FolderName;
+       // hubConnection.invoke("Send", "message");
+        //hubConnection.invoke("Send", { "name": "name", "age": parseInt('1') });
+        //hubConnection.invoke("Send", { "from": "from", "to": "to", "folder": parseInt('1'), "name": "name" });
+     //  });
 
         hubConnection.start();
 </script>

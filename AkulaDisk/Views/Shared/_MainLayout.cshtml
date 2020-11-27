@@ -117,6 +117,12 @@
                 <li>
                     <!--<partial name="_AddFolder" />-->
                 </li>
+                @if (User.IsInRole("guest"))
+                {
+                    <li>
+                        <a asp-controller="Roles" asp-action="Index"><span class="fa fa-paper-plane mr-3"></span>Shared</a>
+                    </li>
+                }
             </ul>
 
         </nav>

@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -64,6 +65,7 @@ namespace AkulaDisk
             services.AddScoped<IFileRepository, FileRepository>();
             services.AddScoped<IRequestRepository, RequestRepository>();
             services.AddScoped<ISharedFolderRepository, SharedRepository>();
+            services.AddSingleton<IUserIdProvider, CustomUserIdProvider>();
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
             services.AddAuthentication()
                 .AddGoogle(options =>
@@ -78,6 +80,7 @@ namespace AkulaDisk
            // builder.RegisterType<AnotherRepository>().As<IAnotherRepository>();
             this.ApplicationContainer = builder.Build();
            // return new AutofacServiceProvider(ApplicationContainer);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -111,6 +114,7 @@ namespace AkulaDisk
                 endpoints.MapRazorPages();
                 endpoints.MapHub<RequestHub>("/chat");
             });
+            
             
 
         }

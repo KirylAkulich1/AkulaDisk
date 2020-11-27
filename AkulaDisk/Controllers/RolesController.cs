@@ -1,5 +1,6 @@
 ﻿using AkulaDisk.Models;
 using Domain.Core;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace AkulaDisk.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class RolesController:Controller
     {
         RoleManager<IdentityRole> _roleManager;

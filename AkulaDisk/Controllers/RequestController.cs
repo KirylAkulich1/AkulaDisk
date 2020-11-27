@@ -35,7 +35,9 @@ namespace AkulaDisk.Controllers
         public IActionResult FolderRequest(string fileId)
         {
             var requests = _sharedrepo.GetRelatedRequests(fileId);
+            var folder = _sharedrepo.GetFolderById(fileId);
             ViewBag.FolderId = fileId;
+            ViewBag.FolderName = folder.File.Name;
             return View(requests);
         }
         [HttpPost]
@@ -73,15 +75,22 @@ namespace AkulaDisk.Controllers
             var request = _reqRepo.GetRequestById(requestid);
             _sharedrepo.AddUser(request.ToUser, request.Folder);
             _sharedrepo.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Income");
         }
 
         public IActionResult Deny(int requestid)
         {
             var request = _reqRepo.GetRequestById(requestid);
             _reqRepo.DeleteRequest(request);
-            return RedirectToAction("Index");
+            _reqRepo.SaveChanges();
+            return RedirectToAction("Income");
         }
-      
+        public IActionResult DeleteSended(int requestid)
+        {
+            var request = _reqRepo.GetRequestById(requestid);
+            _reqRepo.DeleteRequest(request);
+            _reqRepo.SaveChanges();
+            return RedirectToAction("Sended");
+        }
     }
 }
