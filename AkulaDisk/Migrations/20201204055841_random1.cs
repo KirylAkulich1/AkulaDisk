@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AkulaDisk.Migrations
 {
-    public partial class init : Migration
+    public partial class random1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -156,7 +156,7 @@ namespace AkulaDisk.Migrations
                 name: "Files",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
+                    Id = table.Column<string>(nullable: false, defaultValueSql: "NEWID()"),
                     Name = table.Column<string>(nullable: true),
                     Path = table.Column<string>(nullable: true),
                     Type = table.Column<int>(nullable: false),
@@ -177,44 +177,100 @@ namespace AkulaDisk.Migrations
                 name: "SharedFolders",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
-                    FileModelId = table.Column<int>(nullable: false),
-                    FileId = table.Column<string>(nullable: true)
+                    Id = table.Column<string>(nullable: false, defaultValueSql: "NEWID()"),
+                    FileModelId = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SharedFolders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SharedFolders_Files_FileId",
-                        column: x => x.FileId,
+                        name: "FK_SharedFolders_Files_FileModelId",
+                        column: x => x.FileModelId,
                         principalTable: "Files",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_SharedFolders_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "SharedUser",
+                name: "AddRequests",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(nullable: false),
-                    FolderId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FromId = table.Column<string>(nullable: true),
+                    ToId = table.Column<string>(nullable: true),
+                    FolderId = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    Date = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SharedUser", x => new { x.UserId, x.FolderId });
+                    table.PrimaryKey("PK_AddRequests", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SharedUser_AspNetUsers_UserId",
+                        name: "FK_AddRequests_SharedFolders_FolderId",
+                        column: x => x.FolderId,
+                        principalTable: "SharedFolders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_AddRequests_AspNetUsers_FromId",
+                        column: x => x.FromId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_AddRequests_AspNetUsers_ToId",
+                        column: x => x.ToId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SharedUsers",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(nullable: false),
+                    FolderId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SharedUsers", x => new { x.UserId, x.FolderId });
+                    table.ForeignKey(
+                        name: "FK_SharedUsers_SharedFolders_FolderId",
+                        column: x => x.FolderId,
+                        principalTable: "SharedFolders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_SharedUsers_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_SharedUser_SharedFolders_UserId",
-                        column: x => x.UserId,
-                        principalTable: "SharedFolders",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AddRequests_FolderId",
+                table: "AddRequests",
+                column: "FolderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AddRequests_FromId",
+                table: "AddRequests",
+                column: "FromId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AddRequests_ToId",
+                table: "AddRequests",
+                column: "ToId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -261,13 +317,28 @@ namespace AkulaDisk.Migrations
                 column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SharedFolders_FileId",
+                name: "IX_SharedFolders_FileModelId",
                 table: "SharedFolders",
-                column: "FileId");
+                column: "FileModelId",
+                unique: true,
+                filter: "[FileModelId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SharedFolders_UserId",
+                table: "SharedFolders",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SharedUsers_FolderId",
+                table: "SharedUsers",
+                column: "FolderId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "AddRequests");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -284,7 +355,7 @@ namespace AkulaDisk.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "SharedUser");
+                name: "SharedUsers");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

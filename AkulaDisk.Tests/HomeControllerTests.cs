@@ -4,6 +4,7 @@ using Interfaces;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Moq;
 using Services.Interfaces;
@@ -30,7 +31,7 @@ namespace AkulaDisk.Tests
 
             var logger = new NullLogger<HomeController>();
             var controller = new HomeController(new Mock<IWebHostEnvironment>().Object,
-                new FakeFileProcessor(), logger,
+                new FakeFileProcessor(),new Mock<ILoggerFactory>().Object,
                 new FakeRepository(),
                 new Mock<IFileRepository>().Object);
             controller.ControllerContext = new ControllerContext();
@@ -41,7 +42,7 @@ namespace AkulaDisk.Tests
         {
             var logger = new NullLogger<HomeController>();
             var controller = new HomeController(new Mock<IWebHostEnvironment>().Object,
-               new FakeFileProcessor(), logger,
+               new FakeFileProcessor(), new Mock<ILoggerFactory>().Object,
                new FakeRepository(),
                new Mock<IFileRepository>().Object);
             controller.ControllerContext = new ControllerContext();
@@ -56,7 +57,7 @@ namespace AkulaDisk.Tests
         {
             var logger = new NullLogger<HomeController>();
             var controller = new HomeController(new Mock<IWebHostEnvironment>().Object,
-               new FakeFileProcessor(), logger,
+               new FakeFileProcessor(), new Mock<ILoggerFactory>().Object,
                new FakeRepository(),
                new Mock<IFileRepository>().Object);
             controller.ControllerContext = new ControllerContext();
@@ -69,7 +70,7 @@ namespace AkulaDisk.Tests
         {
             var logger = new NullLogger<HomeController>();
             var controller = new HomeController(new Mock<IWebHostEnvironment>().Object,
-               new FakeFileProcessor(), logger,
+               new FakeFileProcessor(), new Mock<ILoggerFactory>().Object,
                new FakeRepository(),
                new Mock<IFileRepository>().Object);
             controller.ControllerContext = new ControllerContext();
@@ -82,7 +83,7 @@ namespace AkulaDisk.Tests
         {
             var logger = new NullLogger<HomeController>();
             var controller = new HomeController(new Mock<IWebHostEnvironment>().Object,
-               new FakeFileProcessor(), logger,
+               new FakeFileProcessor(), new Mock<ILoggerFactory>().Object,
                new FakeRepository(),
                new Mock<IFileRepository>().Object);
             controller.ControllerContext = new ControllerContext();
@@ -95,7 +96,7 @@ namespace AkulaDisk.Tests
         {
             var logger = new NullLogger<HomeController>();
             var controller = new HomeController(new Mock<IWebHostEnvironment>().Object,
-               new FakeFileProcessor(), logger,
+               new FakeFileProcessor(), new Mock<ILoggerFactory>().Object,
                new FakeRepository(),
                new Mock<IFileRepository>().Object);
             controller.ControllerContext = new ControllerContext();
@@ -108,7 +109,7 @@ namespace AkulaDisk.Tests
         {
             var logger = new NullLogger<HomeController>();
             var controller = new HomeController(new Mock<IWebHostEnvironment>().Object,
-               new FakeFileProcessor(), logger,
+               new FakeFileProcessor(), new Mock<ILoggerFactory>().Object,
                new FakeRepository(),
                new Mock<IFileRepository>().Object);
             controller.ControllerContext = new ControllerContext();

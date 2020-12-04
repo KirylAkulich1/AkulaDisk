@@ -13,6 +13,7 @@ namespace Infrastructure.Data
         public DbSet<FileModel> Files { get; set; }
         public DbSet<SharedFolder> SharedFolders { get; set; }
         public DbSet<AddRequest> AddRequests { get; set; }
+        public DbSet<SharedUser> SharedUsers { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -36,7 +37,7 @@ namespace Infrastructure.Data
             builder.Entity<SharedUser>().
                 HasOne(p => p.Folder).
                 WithMany(p => p.Users).
-                HasForeignKey(p => p.UserId);
+                HasForeignKey(p => p.FolderId);
             builder.Entity<SharedUser>()
                 .HasOne(p => p.User)
                 .WithMany(p => p.SharedFiles)

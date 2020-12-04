@@ -100,8 +100,9 @@ namespace Infrastructure.Repositories
 
         public ApplicationUser GetUserWithOtherSharedFolders(string UserName)
         {
-            var user = db.Users.Include(p => p.SharedFiles).ThenInclude(p => p.Folder).First(p => p.UserName == UserName);
+            var user = db.Users.Include(p => p.SharedFiles).ThenInclude(p => p.Folder).ThenInclude(p=>p.File).First(p => p.UserName == UserName);
             return user;
         }
+
     }
 }

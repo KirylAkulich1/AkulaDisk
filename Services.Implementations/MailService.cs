@@ -46,7 +46,7 @@ namespace Services.Implementations
             builder.HtmlBody = mailRequest.Body;
             email.Body = builder.ToMessageBody();
             using var smtp = new SmtpClient();
-//await smtp.ConnectAsync("smtp.yandex.ru", 25, false);
+            await smtp.ConnectAsync("smtp.yandex.ru", 25, false);
             // smtp.Connect(_mailSettings.Host, _mailSettings.Port, SecureSocketOptions.StartTls);
   //          smtp.Authenticate(_mailSettings.Mail, _mailSettings.Password);
     //        await smtp.SendAsync(email);

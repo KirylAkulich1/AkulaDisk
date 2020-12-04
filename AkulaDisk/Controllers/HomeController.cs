@@ -14,21 +14,29 @@ using Services.Interfaces;
 using Microsoft.AspNetCore.Hosting;
 
 using Domain.Core;
+using Services.Implementations;
+using System.IO;
 
 namespace AkulaDisk.Controllers
 {
    [Authorize]
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger _fileLogger;
+        private readonly ILogger _errorFileLogger;
+        private readonly ILogger _stdoutLogger;
         private readonly IUserRepository _userRepo;
         private readonly IFileRepository _fileRepo;
         private readonly IFileProcessor _fileProc;
         private readonly IWebHostEnvironment _appEnviroment;
 
-        public HomeController(IWebHostEnvironment appEnviroment, IFileProcessor fileProc,ILogger<HomeController> logger, IUserRepository userRepo,IFileRepository fileRepo)
+        public HomeController(IWebHostEnvironment appEnviroment, IFileProcessor fileProc,ILoggerFactory loggerFactory, IUserRepository userRepo,IFileRepository fileRepo)
         {
-            _logger = logger;
+            loggerFactory.AddFile(Path.Combine(Directory.GetCurrentDirectory(), "logger.txt"));
+            loggerFactory.AddErrorFile(Path.Combine(Directory.GetCurrentDirectory(), "elogger.txt"));
+            _fileLogger = loggerFactory.CreateLogger("FileLogger");
+            _errorFileLogger = loggerFactory.CreateLogger("ErrorFileLogger");
+            _stdoutLogger = loggerFactory.CreateLogger("StdoutFileLogger");
             _userRepo = userRepo;
             _fileRepo = fileRepo;
             _fileProc = fileProc;
@@ -38,6 +46,15 @@ namespace AkulaDisk.Controllers
 
         public IActionResult Index(string path="\\")
         {
+            _fileLogger.LogInformation("test");
+            _stdoutLogger.LogInformation("test");
+            try {
+                throw new ArgumentException();
+            }
+            catch (Exception e) {
+                _errorFileLogger.LogError(e,"test");
+                _fileLogger.LogError(e, "test");
+            }
             ViewBag.CurrentPath = path;
             var user = _userRepo.GetUserByName(User.Identity.Name);
             var fileList = _userRepo.GetFiles(User.Identity.Name,path);
@@ -45,6 +62,10 @@ namespace AkulaDisk.Controllers
         }
         public IActionResult AddFile(IFormFile uploadedFile, string path)
         {
+            if(uploadedFile==null)
+            {
+                return RedirectToAction("Index", new { path = path });
+            }
             _fileProc.Save(uploadedFile,User.Identity.Name,_appEnviroment.WebRootPath,path);
           //  var user = _userRepo.GetUserByName(User.Identity.Name);
             FileModel file = new FileModel
@@ -57,7 +78,7 @@ namespace AkulaDisk.Controllers
             _userRepo.AddFile(User.Identity.Name, file);
            // _fileRepo.Create(file);
            // _fileRepo.Save();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index",new  {path=path });
         }
         public IActionResult Privacy()
         {

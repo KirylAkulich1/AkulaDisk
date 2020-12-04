@@ -11,6 +11,7 @@ namespace Domain.Interfaces
         SharedFolder GetFolderById(string SharedId);
         IEnumerable<AddRequest> GetRelatedRequests(string SharedId);
         void AddUser(ApplicationUser user,SharedFolder folder);
+        bool IsUserHasAccess(string userName, string folderId);
         void SaveChanges();
         
     }

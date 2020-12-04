@@ -7,9 +7,15 @@
       "ignored": "true"
     },
     "mssql1": {
-      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroup')]/providers/Microsoft.Sql/servers/akuladiskdbserver/databases/AkulaDisk_db",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroup')]/providers/Microsoft.Sql/servers/akuladiskdbserver/databases/Application_Data",
       "type": "mssql.azure",
-      "connectionId": "DefaultConnection",
+      "connectionId": "AzureConnection",
+      "secretStore": "AzureAppSettings"
+    },
+    "signalr1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroup')]/providers/Microsoft.SignalRService/SignalR/AkulaDiskservice",
+      "type": "signalr.azure",
+      "connectionId": "Azure__SignalR__ConnectionString",
       "secretStore": "AzureAppSettings"
     }
   }

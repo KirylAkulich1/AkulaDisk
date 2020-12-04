@@ -4,6 +4,7 @@ using Infrastructure.Data;
 using Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Infrastructure.Repositories
 {
@@ -76,6 +77,11 @@ namespace Infrastructure.Repositories
             file.Shared = folder;
            
 
+        }
+
+        public IEnumerable<FileModel> GetFilesbyPath(string path)
+        {
+            return db.Files.Where(p=>p.Path==path);
         }
     }
 }

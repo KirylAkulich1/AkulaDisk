@@ -21,6 +21,7 @@ namespace Domain.Interfaces
         void AddToIncomeRequuest(string userName,AddRequest req);
         void AddToOutComeRequest(string userName,AddRequest req);
         ApplicationUser GetUserWithOtherSharedFolders(string UserName);
+
         
     }
 }

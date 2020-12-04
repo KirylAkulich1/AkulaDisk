@@ -20,6 +20,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Services.Implementations;
 using Services.Interfaces;
 
@@ -45,35 +46,39 @@ namespace AkulaDisk
             if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
             {
                 connection = Configuration.GetConnectionString("AzureConnection");
+                services.AddSignalR()
+                .AddAzureSignalR("Endpoint=https://akuladiskservice.service.signalr.net;AccessKey=P741yTJ0KZ64KKCBUA82cEO5jrV9I3quqDpKYzcYUaA=;Version=1.0;");
             }
             else
             {
+                services.AddSignalR();
                 connection = Configuration.GetConnectionString("DefaultConnection");
             }
-           services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(connection, b => b.MigrationsAssembly("AkulaDisk")));
-         //   services.AddDbContext<FileContext>(options =>
-           //     options.UseSqlServer(connection, b => b.MigrationsAssembly("AkulaDisk")));
+           // services.BuildServiceProvider().GetService<ApplicationDbContext>().Database.Migrate();
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(connection, b => b.MigrationsAssembly("AkulaDisk")));            
+            //   services.AddDbContext<FileContext>(options =>
+            //     options.UseSqlServer(connection, b => b.MigrationsAssembly("AkulaDisk")));
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddRoles<IdentityRole>()
                .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddMvc();
+            services.AddSingleton<IUserIdProvider, CustomUserIdProvider>();
             services.AddTransient<IMailService, MailService>();
-            //services.BuildServiceProvider().GetService<ApplicatopnDbContext>().Database.Migrate();
             services.AddTransient<IFileProcessor, FileProcessor>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IFileRepository, FileRepository>();
             services.AddScoped<IRequestRepository, RequestRepository>();
             services.AddScoped<ISharedFolderRepository, SharedRepository>();
-            services.AddSingleton<IUserIdProvider, CustomUserIdProvider>();
+            //services.AddSingleton<IUserIdProvider, CustomUserIdProvider>();
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
             services.AddAuthentication()
                 .AddGoogle(options =>
                 {
-                    options.ClientId = "155280292605-h7uvfng0ohd0uc4b6hb41mdljs14933p.apps.googleusercontent.com";
-                    options.ClientSecret = "_w-HL6Pn1h27BfbyUMMqlryA";
+                    options.ClientId = "262809036754-bq8lnu51glgaqcoqq16g70ic6se711cc.apps.googleusercontent.com";
+                    options.ClientSecret = "rOk6K4YsnbqgdHarPybMT0wl";
                 });
-            services.AddSignalR();
+            
             var builder = new ContainerBuilder();
             builder.Populate(services);
            
@@ -92,9 +97,10 @@ namespace AkulaDisk
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseDeveloperExceptionPage();
+               // app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+               // app.UseHsts();
             }
             app.UseHttpsRedirection();
             app.UseStatusCodePagesWithRedirects("/Home/Error");

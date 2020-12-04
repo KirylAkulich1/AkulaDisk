@@ -42,9 +42,9 @@ namespace AkulaDisk.SignalR
             _logger.LogError(message.To);
             TableRow tr = new TableRow { From = message.From, Request = request.Id,Data=request.Date.ToString(),Name=request.Name };
            // message.Request = request.Id;
-            //message.Date = request.Date.ToString();
-            await Clients.All.SendAsync("Recieve", tr);
-            await Clients.Caller.SendAsync("Send", message);
+           // message.Data = request.Date.ToString();
+            await Clients.User(message.To).SendAsync("Recieve", tr);
+            await Clients.Caller.SendAsync("Sended", message);
         }
         public override async Task OnConnectedAsync()
         {

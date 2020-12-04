@@ -4,16 +4,14 @@ using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AkulaDisk.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201120053255_init10")]
-    partial class init10
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -174,12 +172,14 @@ namespace AkulaDisk.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("FolderId")
-                        .HasColumnType("int");
+                    b.Property<string>("FolderId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("UserId", "FolderId");
 
-                    b.ToTable("SharedUser");
+                    b.HasIndex("FolderId");
+
+                    b.ToTable("SharedUsers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -352,14 +352,14 @@ namespace AkulaDisk.Migrations
 
             modelBuilder.Entity("Domain.Core.SharedUser", b =>
                 {
-                    b.HasOne("Domain.Core.ApplicationUser", "User")
-                        .WithMany("SharedFiles")
-                        .HasForeignKey("UserId")
+                    b.HasOne("Domain.Core.SharedFolder", "Folder")
+                        .WithMany("Users")
+                        .HasForeignKey("FolderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Core.SharedFolder", "Folder")
-                        .WithMany("Users")
+                    b.HasOne("Domain.Core.ApplicationUser", "User")
+                        .WithMany("SharedFiles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

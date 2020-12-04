@@ -14,5 +14,11 @@ namespace Services.Implementations
             factory.AddProvider(new FileLoggerProvider(filePath));
             return factory;
         }
+        public static ILoggerFactory AddErrorFile(this ILoggerFactory factory,
+                                                    string filePath)
+        {
+            factory.AddProvider(new ErrorFileLoggerProvider(filePath));
+            return factory;
+        }
     }
 }

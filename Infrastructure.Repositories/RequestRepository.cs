@@ -25,9 +25,9 @@ namespace Infrastructure.Repositories
 
         public AddRequest GetRequestById(int id)
         {
-            return _context.AddRequests.Include(p => p.ToUser).Include(p => p.Folder).First(p => p.Id == id);
+            return _context.AddRequests.Include(p => p.ToUser).Include(p => p.Folder).ThenInclude(p=>p.Users).First(p => p.Id == id);
         }
-
+       
         public void SaveChanges()
         {
             _context.SaveChanges();

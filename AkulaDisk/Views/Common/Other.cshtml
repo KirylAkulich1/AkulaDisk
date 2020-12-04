@@ -1,0 +1,18 @@
+﻿@model IEnumerable<SharedUser>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Folder</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var folder in Model)
+        {
+            <tr>
+
+                <td><a asp-controller="Common" asp-action="CommonFolder" asp-route-id=@folder.FolderId asp-route-path=@folder.Folder.File.Path >@folder.Folder.File.Name</a></td>
+            </tr>
+        }
+
+    </tbody>
+</table>

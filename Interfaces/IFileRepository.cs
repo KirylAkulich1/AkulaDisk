@@ -14,7 +14,7 @@ namespace Interfaces
         void Update(FileModel file);
         void Delete(string id);
         void Save();
-        void MakeShared(string id,SharedFolder folder);
-       
+        void MakeShared(string id, SharedFolder folder);
+        IEnumerable<FileModel> GetFilesbyPath(string path);
     }
 }

@@ -9,10 +9,9 @@
                 @if (file.Type == Domain.Core.FileType.Folder)
                 {
                     <i class="fa fa-folder"></i>
-                    <partial name="_RefPartial" model="file" /><h6>@file.Path</h6>
+                    <partial name="_RefPartial" model="file" />
                      <div class="pull-right">
                             <a class="fa fa-share" asp-controller="Home" asp-action="MakeShared" asp-route-path=@ViewBag.CurrentPath asp-route-folderId=@file.Id></a>
-                       
                      </div>
 
                 }
