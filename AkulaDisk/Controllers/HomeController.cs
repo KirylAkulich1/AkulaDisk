@@ -46,15 +46,7 @@ namespace AkulaDisk.Controllers
 
         public IActionResult Index(string path="\\")
         {
-            _fileLogger.LogInformation("test");
-            _stdoutLogger.LogInformation("test");
-            try {
-                throw new ArgumentException();
-            }
-            catch (Exception e) {
-                _errorFileLogger.LogError(e,"test");
-                _fileLogger.LogError(e, "test");
-            }
+         
             ViewBag.CurrentPath = path;
             var user = _userRepo.GetUserByName(User.Identity.Name);
             var fileList = _userRepo.GetFiles(User.Identity.Name,path);

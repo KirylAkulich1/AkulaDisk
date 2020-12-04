@@ -53,7 +53,7 @@ namespace AkulaDisk.Controllers
             {
                 Subject="Subject",
                 Attachments = new List<IFormFile>(),
-                ToEmail = "akuladisksender@gmail.com",
+                ToEmail = "AkulaDiskSender@yandex.by",
                 Body = "Hello message"
             };
             await _mailservice.SendEmailAsync(mailRequest);
