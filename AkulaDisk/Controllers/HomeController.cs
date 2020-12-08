@@ -33,7 +33,7 @@ namespace AkulaDisk.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
 
         public HomeController(IWebHostEnvironment appEnviroment, IFileProcessor fileProc,ILoggerFactory loggerFactory, 
-            IUserRepository userRepo,IFileRepository fileRepo,SignInManager<ApplicationUser> signInManager)
+            IUserRepository userRepo,IFileRepository fileRepo)
         {
             loggerFactory.AddFile(Path.Combine(Directory.GetCurrentDirectory(), "logger.txt"));
             loggerFactory.AddErrorFile(Path.Combine(Directory.GetCurrentDirectory(), "elogger.txt"));
@@ -44,7 +44,7 @@ namespace AkulaDisk.Controllers
             _fileRepo = fileRepo;
             _fileProc = fileProc;
             _appEnviroment = appEnviroment;
-            _signInManager = signInManager;
+
         }
 
         public IActionResult Index(string path="\\")
@@ -124,6 +124,7 @@ namespace AkulaDisk.Controllers
             _userRepo.AddShared(User.Identity.Name, sharedFolder);
             return RedirectToAction("Index",new  {path=path });
         }
+        /*
         public async Task<IActionResult> Logout(string returnUrl = null)
         {
             await _signInManager.SignOutAsync();
@@ -135,6 +136,6 @@ namespace AkulaDisk.Controllers
             {
                 return View();
             }
-        }
+        }*/
     }
 }
