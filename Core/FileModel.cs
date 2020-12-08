@@ -20,5 +20,6 @@ namespace Domain.Core
         public SharedFolder Shared { get; set; }
         public string ApplicationUserId { get; set; }
         public ApplicationUser Owner { get; set; }
+        public bool isShared { get; set; }
     }
 }

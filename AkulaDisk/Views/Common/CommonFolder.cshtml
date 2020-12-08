@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<FileModel>
-<<table class="table" id="reqtable">
+<table class="table" id="reqtable">
     <thead>
         <tr>
             <th scope="col">File</th>
@@ -14,9 +14,9 @@
             <tr>
 
                 <td>
-                    @if (file.Type == FileType.File)
+                    @if (file.Type == FileType.Folder)
                     {
-                        <a asp-controller="Common" asp-route-id=@file.Id asp-route-path=@String.Concat(file.Path,"\\",file.Name)>@file.Name</a>
+                        <a asp-controller="Common" asp-route-id=@ViewBag.CurrentId asp-route-ownername=@file.Owner.UserName asp-route-path=@String.Concat(file.Path,"\\",file.Name)>@file.Name</a>
                     }
                     else
                     {
@@ -40,11 +40,11 @@
                     }
                     else
                     {
-                        <i class="fa fa-download"></i>
+                        <a asp-controller="Common" asp-action="Download" asp-route-id=@ViewBag.CurrentId asp-route-ownername=@file.Owner.UserName asp-route-path=@file.Path class="fa fa-download"></a>
                     }
                 </td>
                 <td>
-                    <i class="fa fa-trash-o"></i>
+                    <a class="fa fa-trash-o" asp-controller="Common" asp-action="Delete" asp-route-id=@file.Id asp-route-ownername=@file.Owner.UserName asp-route-path=@file.Path></a>
                 </td>
                
 
@@ -63,9 +63,11 @@
                     <i class="fas fa-file-alt" data-fa-transform="shrink-2 up-4"></i>
                     <i class="fas fa-file-pdf" data-fa-transform="shrink-3 down-2 right-6 rotate-45"></i>
                 </div>
-                <form asp-action="AddFile" asp-controller="Home" method="post" enctype="multipart/form-data">
+                <form asp-action="Load" asp-route-id=@ViewBag.CurrentId asp-controller="Common" method="post" enctype="multipart/form-data">
                     <input type="file" name="uploadedfile" />
-                    <input value=@ViewBag.CurrentPath name="Path" hidden />
+                    <input value=@ViewBag.CurrentPath name="path" hidden />
+                    <input value=@ViewBag.CurrentId name="id" hidden/>
+                    <input value=@ViewBag.OwnerName name="ownername" hidden/>
                     <input type="submit" value="Загрузить" />
 
                 </form>

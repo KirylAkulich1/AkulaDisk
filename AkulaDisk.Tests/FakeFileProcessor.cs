@@ -8,6 +8,11 @@ namespace AkulaDisk.Tests
 {
     public class FakeFileProcessor : IFileProcessor
     {
+        public void AddFolder(string FolderPath)
+        {
+            throw new NotImplementedException();
+        }
+
         public void CreateFolder(string FoldePath)
         {
             
@@ -26,6 +31,11 @@ namespace AkulaDisk.Tests
         public void Save(IFormFile file, string userName, string webRootPath, string relativePath)
         {
             
+        }
+
+        public void Save(IFormFile file, string path)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -100,11 +100,11 @@
             <h1><a href="index.html" class="logo">AkulaDisk</a></h1>
             <ul class="list-unstyled components mb-5">
                 <li class="active">
-                    <a href="#"><span class="fa fa-home mr-3"></span> MainPage</a>
+                    <a asp-controller="Home" asp-action="Index"><span class="fa fa-home mr-3"></span> MainPage</a>
                 </li>
-                <li>
+                <!--<li>
                     <a asp-controller="Common" asp-action=""><span class="fa fa-user mr-3"></span>My requests</a>
-                </li>
+                </li>-->
                 <li>
                     <a asp-controller="Request" asp-action="Income"><span class="fa fa-sticky-note mr-3"></span> Income Requests</a>
                 </li>
@@ -115,17 +115,20 @@
                     <a asp-controller="Common" asp-action="Index"><span class="fa fa-paper-plane mr-3"></span>Shared</a>
                 </li>
                 <li>
-                    <!--<partial name="_AddFolder" />-->
-                </li>
-                <li>
                     <a asp-controller="Common" asp-action="Other"><span class="fa fa-paper-plane mr-3"></span>Other</a>
                 </li>
-                @if (User.IsInRole("guest"))
+                @if (User.IsInRole("admin"))
                 {
                     <li>
-                        <a asp-controller="Roles" asp-action="Index"><span class="fa fa-paper-plane mr-3"></span>Shared</a>
+                        <a asp-controller="Roles" asp-action="Index"><span class="fa fa-paper-plane mr-3"></span>Admin panel</a>
                     </li>
                 }
+                <li>
+                    <a asp-controller="Home" asp-action="Logout"><span class="fa fa-sign-out mr-3"></span> Logout</a>
+                </li>
+                <li>
+                    <a href="/Identity/Account/ConfirmEmail"><span class="fa fa-mail-forward mr-3"></span>Email Confirm</a>
+                </li>
             </ul>
 
         </nav>

@@ -57,7 +57,7 @@ namespace Infrastructure.Repositories
 
         public ApplicationUser GetUserByNameWithShared(string UserName)
         {
-            return db.Users.Include(p => p.OwnShared).ThenInclude(p=>p.File).First(p => p.UserName == UserName);
+            return db.Users.Include(p => p.OwnShared).ThenInclude(p=>p.File).ThenInclude(p=>p.Owner).First(p => p.UserName == UserName);
         }
         public ApplicationUser GetUserByNameWithSended(string UserName)
         {
@@ -100,7 +100,13 @@ namespace Infrastructure.Repositories
 
         public ApplicationUser GetUserWithOtherSharedFolders(string UserName)
         {
-            var user = db.Users.Include(p => p.SharedFiles).ThenInclude(p => p.Folder).ThenInclude(p=>p.File).First(p => p.UserName == UserName);
+            var user = db.Users.Include(p => p.SharedFiles).
+                ThenInclude(p=>p.Folder)
+                .ThenInclude(p=>p.File)
+                .Include(p => p.SharedFiles)
+                 .ThenInclude(p => p.Folder)
+                .ThenInclude(p => p.User)
+                .First(p => p.UserName == UserName);
             return user;
         }
 

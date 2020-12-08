@@ -19,7 +19,6 @@
                 <td>@request.Date</td>
                 <td> <a asp-controller="Request" asp-action="Accept" asp-route-requestid=@request.Id class="fa fa-check"></a></td>
                 <td> <a asp-controller="Request" asp-action="Deny" asp-route-requestid=@request.Id class="fa fa-ban"></a></td>
-
             </tr>
         }
 
@@ -58,8 +57,8 @@
         cell2.innerHTML = addrequest.from;
         cell1.innerHTML = addrequest.name;
         cell3.innerHTML = addrequest.data;
-        cell4.innerHTML = ' <a href="Request/Accept?requestid = ${ addrequest.request.toString() }" class="fa fa-check"></a>'
-        cell5.innerHTML = ' <a href="Request/Accept?requestid = ${ addrequest.request.toString()}"   class="fa fa-ban"></a>'
+        cell4.innerHTML = ` <a href="Request/Accept?requestid =${addrequest.request.toString()}" class="fa fa-check"></a>`;
+        cell5.innerHTML = ` <a href="Request/Accept?requestid = ${ addrequest.request.toString()}" class="fa fa-ban"></a>`;
      //   let elem = document.createElement("p");
       //  elem.appendChild(document.createTextNode("!!!!!"));
        // var firstElem = document.getElementById("chatroom").firstChild;

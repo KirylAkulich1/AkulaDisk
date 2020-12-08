@@ -19,7 +19,7 @@ namespace WebApplication8.TagHelpers
         {
             output.TagName = "a";
             output.TagMode = TagMode.StartTagAndEndTag;
-            output.Attributes.SetAttribute("href", $"{"/?path="+From+To+'/'} ");
+            output.Attributes.SetAttribute("href", $"{"/?path="+From+To+'\\'} ");
             string content = (await output.GetChildContentAsync()).GetContent();
             output.Content.SetHtmlContent(content);
         }

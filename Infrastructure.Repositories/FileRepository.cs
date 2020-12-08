@@ -2,6 +2,7 @@
 using Domain.Core;
 using Infrastructure.Data;
 using Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,7 +43,7 @@ namespace Infrastructure.Repositories
 
         public FileModel GetFile(string id)
         {
-            return db.Files.Find(id);
+            return db.Files.Include(p=>p.Shared).ThenInclude(p=>p.Requests).Include(p=>p.Owner).First(p=>p.Id==id);
         }
 
         public IEnumerable<FileModel> GetFileList()

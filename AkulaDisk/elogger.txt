@@ -299,3 +299,354 @@ test
 test
 test
 An unhandled exception has occurred while executing the request.
+User created a new account with password.
+someone@gmail.com
+someone@gmail.com
+User logged in.
+user@gmail.com
+user@gmail.com
+user@gmail.com
+user@gmail.com
+user@gmail.com
+user@gmail.com
+user@gmail.com
+user@gmail.com
+user@gmail.com
+user@gmail.com
+user@gmail.com
+user@gmail.com
+user@gmail.com
+Invalid password for user f35f877a-bd20-459b-b283-188a894ad556.
+Invalid password for user f35f877a-bd20-459b-b283-188a894ad556.
+Failed executing DbCommand (8ms) [Parameters=[@__UserName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[Id], [t].[AccessFailedCount], [t].[ConcurrencyStamp], [t].[Email], [t].[EmailConfirmed], [t].[LockoutEnabled], [t].[LockoutEnd], [t].[NormalizedEmail], [t].[NormalizedUserName], [t].[PasswordHash], [t].[PhoneNumber], [t].[PhoneNumberConfirmed], [t].[SecurityStamp], [t].[TwoFactorEnabled], [t].[UserName], [f].[Id], [f].[ApplicationUserId], [f].[Name], [f].[Path], [f].[Type], [f].[isShared], [s].[Id], [s].[FileModelId], [s].[UserId]
+FROM (
+    SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+    FROM [AspNetUsers] AS [a]
+    WHERE [a].[UserName] = @__UserName_0
+) AS [t]
+LEFT JOIN [Files] AS [f] ON [t].[Id] = [f].[ApplicationUserId]
+LEFT JOIN [SharedFolders] AS [s] ON [t].[Id] = [s].[UserId]
+ORDER BY [t].[Id], [f].[Id], [s].[Id]
+An exception occurred while iterating over the results of a query for context type 'Infrastructure.Data.ApplicationDbContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'isShared'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.InitializeReader(DbContext _, Boolean result)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.MoveNext()
+ClientConnectionId:4aa40306-4956-4596-8cbc-56a92981ef46
+Error Number:207,State:1,Class:16
+Failed executing DbCommand (6ms) [Parameters=[@__UserName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[Id], [t].[AccessFailedCount], [t].[ConcurrencyStamp], [t].[Email], [t].[EmailConfirmed], [t].[LockoutEnabled], [t].[LockoutEnd], [t].[NormalizedEmail], [t].[NormalizedUserName], [t].[PasswordHash], [t].[PhoneNumber], [t].[PhoneNumberConfirmed], [t].[SecurityStamp], [t].[TwoFactorEnabled], [t].[UserName], [f].[Id], [f].[ApplicationUserId], [f].[Name], [f].[Path], [f].[Type], [f].[isShared], [s].[Id], [s].[FileModelId], [s].[UserId]
+FROM (
+    SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+    FROM [AspNetUsers] AS [a]
+    WHERE [a].[UserName] = @__UserName_0
+) AS [t]
+LEFT JOIN [Files] AS [f] ON [t].[Id] = [f].[ApplicationUserId]
+LEFT JOIN [SharedFolders] AS [s] ON [t].[Id] = [s].[UserId]
+ORDER BY [t].[Id], [f].[Id], [s].[Id]
+An exception occurred while iterating over the results of a query for context type 'Infrastructure.Data.ApplicationDbContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'isShared'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.InitializeReader(DbContext _, Boolean result)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.MoveNext()
+ClientConnectionId:a1c3a7b3-09f1-4481-bc1f-14e9bfcbc34c
+Error Number:207,State:1,Class:16
+Failed executing DbCommand (5ms) [Parameters=[@__UserName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[Id], [t].[AccessFailedCount], [t].[ConcurrencyStamp], [t].[Email], [t].[EmailConfirmed], [t].[LockoutEnabled], [t].[LockoutEnd], [t].[NormalizedEmail], [t].[NormalizedUserName], [t].[PasswordHash], [t].[PhoneNumber], [t].[PhoneNumberConfirmed], [t].[SecurityStamp], [t].[TwoFactorEnabled], [t].[UserName], [f].[Id], [f].[ApplicationUserId], [f].[Name], [f].[Path], [f].[Type], [f].[isShared], [s].[Id], [s].[FileModelId], [s].[UserId]
+FROM (
+    SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+    FROM [AspNetUsers] AS [a]
+    WHERE [a].[UserName] = @__UserName_0
+) AS [t]
+LEFT JOIN [Files] AS [f] ON [t].[Id] = [f].[ApplicationUserId]
+LEFT JOIN [SharedFolders] AS [s] ON [t].[Id] = [s].[UserId]
+ORDER BY [t].[Id], [f].[Id], [s].[Id]
+An exception occurred while iterating over the results of a query for context type 'Infrastructure.Data.ApplicationDbContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'isShared'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.InitializeReader(DbContext _, Boolean result)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.MoveNext()
+ClientConnectionId:3c816f47-6a97-4606-919d-2dd2981bd713
+Error Number:207,State:1,Class:16
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User logged out.
+User created a new account with password.
+someone@gmail.com
+someone@gmail.com
+someone@gmail.com
+someone@gmail.com
+someone@gmail.com
+someone@gmail.com
+someone@gmail.com
+someone@gmail.com
+someone@gmail.com
+User logged in.
+User logged in.
+User logged in.
+User logged in.
+someone@gmail.com
+someone@gmail.com
+Failed to invoke hub method 'Send'.
+Failed to invoke hub method 'Send'.
+someone@gmail.com
+someone@gmail.com
+someone@gmail.com
+someone@gmail.com
+someone@gmail.com
+someone@gmail.com
+Failed to invoke hub method 'Send'.
+someone@gmail.com
+Failed to invoke hub method 'Send'.
+someone@gmail.com
+Failed to invoke hub method 'Send'.
+someone@gmail.com
+Failed to invoke hub method 'Send'.
+someone@gmail.com
+Failed to invoke hub method 'Send'.
+someone@gmail.com
+Failed to invoke hub method 'Send'.
+someone@gmail.com
+someone@gmail.com
+someone@gmail.com
+someone@gmail.com

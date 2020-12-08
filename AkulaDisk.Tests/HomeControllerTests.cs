@@ -1,8 +1,10 @@
 ﻿using AkulaDisk.Controllers;
+using Domain.Core;
 using Domain.Interfaces;
 using Interfaces;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -31,9 +33,10 @@ namespace AkulaDisk.Tests
 
             var logger = new NullLogger<HomeController>();
             var controller = new HomeController(new Mock<IWebHostEnvironment>().Object,
-                new FakeFileProcessor(),new Mock<ILoggerFactory>().Object,
+                new FakeFileProcessor(), new Mock<ILoggerFactory>().Object,
                 new FakeRepository(),
-                new Mock<IFileRepository>().Object);
+                new Mock<IFileRepository>().Object,
+                new Mock<SignInManager<ApplicationUser>>().Object) ;
             controller.ControllerContext = new ControllerContext();
             controller.ControllerContext.HttpContext = new DefaultHttpContext { User = user };
         }
@@ -44,7 +47,8 @@ namespace AkulaDisk.Tests
             var controller = new HomeController(new Mock<IWebHostEnvironment>().Object,
                new FakeFileProcessor(), new Mock<ILoggerFactory>().Object,
                new FakeRepository(),
-               new Mock<IFileRepository>().Object);
+               new Mock<IFileRepository>().Object,
+               new Mock<SignInManager<ApplicationUser>>().Object);
             controller.ControllerContext = new ControllerContext();
             controller.ControllerContext.HttpContext = new DefaultHttpContext { User = user };
             var result = controller.Index() as ViewResult;
@@ -59,7 +63,8 @@ namespace AkulaDisk.Tests
             var controller = new HomeController(new Mock<IWebHostEnvironment>().Object,
                new FakeFileProcessor(), new Mock<ILoggerFactory>().Object,
                new FakeRepository(),
-               new Mock<IFileRepository>().Object);
+               new Mock<IFileRepository>().Object,
+               new Mock<SignInManager<ApplicationUser>>().Object);
             controller.ControllerContext = new ControllerContext();
             controller.ControllerContext.HttpContext = new DefaultHttpContext { User = user };
             var result = controller.AddFile(new Mock<IFormFile>().Object,"\\") as RedirectToActionResult;
@@ -72,7 +77,8 @@ namespace AkulaDisk.Tests
             var controller = new HomeController(new Mock<IWebHostEnvironment>().Object,
                new FakeFileProcessor(), new Mock<ILoggerFactory>().Object,
                new FakeRepository(),
-               new Mock<IFileRepository>().Object);
+               new Mock<IFileRepository>().Object,
+               new Mock<SignInManager<ApplicationUser>>().Object);
             controller.ControllerContext = new ControllerContext();
             controller.ControllerContext.HttpContext = new DefaultHttpContext { User = user };
             var result = controller.Download("E:\\abc\\C\\C0019_test.jpg", "\\") as IActionResult;
@@ -85,7 +91,8 @@ namespace AkulaDisk.Tests
             var controller = new HomeController(new Mock<IWebHostEnvironment>().Object,
                new FakeFileProcessor(), new Mock<ILoggerFactory>().Object,
                new FakeRepository(),
-               new Mock<IFileRepository>().Object);
+               new Mock<IFileRepository>().Object,
+               new Mock<SignInManager<ApplicationUser>>().Object);
             controller.ControllerContext = new ControllerContext();
             controller.ControllerContext.HttpContext = new DefaultHttpContext { User = user };
             var result = controller.Delete("","","") as RedirectToActionResult;
@@ -98,7 +105,8 @@ namespace AkulaDisk.Tests
             var controller = new HomeController(new Mock<IWebHostEnvironment>().Object,
                new FakeFileProcessor(), new Mock<ILoggerFactory>().Object,
                new FakeRepository(),
-               new Mock<IFileRepository>().Object);
+               new Mock<IFileRepository>().Object,
+               new Mock<SignInManager<ApplicationUser>>().Object);
             controller.ControllerContext = new ControllerContext();
             controller.ControllerContext.HttpContext = new DefaultHttpContext { User = user };
             var result = controller.CreateFolder("", "") as RedirectToActionResult;
@@ -111,7 +119,8 @@ namespace AkulaDisk.Tests
             var controller = new HomeController(new Mock<IWebHostEnvironment>().Object,
                new FakeFileProcessor(), new Mock<ILoggerFactory>().Object,
                new FakeRepository(),
-               new Mock<IFileRepository>().Object);
+               new Mock<IFileRepository>().Object,
+               new Mock<SignInManager<ApplicationUser>>().Object);
             controller.ControllerContext = new ControllerContext();
             controller.ControllerContext.HttpContext = new DefaultHttpContext { User = user };
             var result = controller.MakeShared("", "file1") as RedirectToActionResult;

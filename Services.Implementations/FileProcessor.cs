@@ -11,10 +11,21 @@ namespace Services.Implementations
 {
    public  class FileProcessor : IFileProcessor
     {
+        public void AddFolder(string FolderPath)
+        {
+            
+        }
+
         public void CreateFolder(string FoldePath)
         {
-            if (!Directory.Exists(FoldePath))
+            try
+            {
                 Directory.CreateDirectory(FoldePath);
+            }
+            catch(Exception)
+            {
+
+            }
         }
 
         public void DeleteFile(string path)
@@ -43,6 +54,14 @@ namespace Services.Implementations
                 Directory.CreateDirectory(webRootPath + @"\Files\" + userName + relativePath);
            
             using (var fileStrem = new FileStream(folderPath + file.FileName, FileMode.OpenOrCreate))
+            {
+                await file.CopyToAsync(fileStrem);
+            }
+        }
+
+        public async void Save(IFormFile file, string path)
+        {
+            using (var fileStrem = new FileStream(path, FileMode.OpenOrCreate))
             {
                 await file.CopyToAsync(fileStrem);
             }

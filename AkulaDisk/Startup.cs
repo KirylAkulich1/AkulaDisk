@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using AkulaDisk.SignalR;
@@ -11,6 +12,7 @@ using Domain.Interfaces;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
 using Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -21,6 +23,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Services.Implementations;
 using Services.Interfaces;
 
@@ -47,19 +51,26 @@ namespace AkulaDisk
             {
                 connection = Configuration.GetConnectionString("AzureConnection");
                 services.AddSignalR()
-                .AddAzureSignalR("Endpoint=https://akuladiskservice.service.signalr.net;AccessKey=P741yTJ0KZ64KKCBUA82cEO5jrV9I3quqDpKYzcYUaA=;Version=1.0;");
+                .AddAzureSignalR(Configuration.GetValue<string>("SignalRSercet"));
             }
             else
             {
                 services.AddSignalR();
                 connection = Configuration.GetConnectionString("DefaultConnection");
+                services.AddSwaggerGen(options => {
+                    options.SwaggerDoc("v1",
+                    new OpenApiInfo { Title = "WebApp", Version = "v1" });
+                });
             }
            // services.BuildServiceProvider().GetService<ApplicationDbContext>().Database.Migrate();
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(connection, b => b.MigrationsAssembly("AkulaDisk")));            
+                options.UseSqlServer(connection, b => b.MigrationsAssembly("AkulaDisk")));
             //   services.AddDbContext<FileContext>(options =>
             //     options.UseSqlServer(connection, b => b.MigrationsAssembly("AkulaDisk")));
-            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
+            services.AddDefaultIdentity<ApplicationUser>(options => {
+                options.SignIn.RequireConfirmedAccount = false;
+            // options.SignIn.RequireConfirmedEmail = true;
+            })
                 .AddRoles<IdentityRole>()
                .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddMvc();
@@ -75,10 +86,10 @@ namespace AkulaDisk
             services.AddAuthentication()
                 .AddGoogle(options =>
                 {
-                    options.ClientId = "262809036754-bq8lnu51glgaqcoqq16g70ic6se711cc.apps.googleusercontent.com";
-                    options.ClientSecret = "rOk6K4YsnbqgdHarPybMT0wl";
+                    options.ClientId = Configuration.GetValue<string>("ClientId");
+                    options.ClientSecret = Configuration.GetValue<string>("ClientSecret");
                 });
-            
+
             var builder = new ContainerBuilder();
             builder.Populate(services);
            
@@ -94,6 +105,10 @@ namespace AkulaDisk
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(options => {
+                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApp");
+                });
             }
             else
             {
@@ -120,8 +135,9 @@ namespace AkulaDisk
                 endpoints.MapRazorPages();
                 endpoints.MapHub<RequestHub>("/chat");
             });
-            
-            
+          
+
+
 
         }
     }

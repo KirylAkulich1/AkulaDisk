@@ -10,7 +10,7 @@
         {
             <tr>
 
-                <td><a asp-controller="Common" asp-action="CommonFolder" asp-route-id=@folder.FolderId asp-route-path=@folder.Folder.File.Path >@folder.Folder.File.Name</a></td>
+                <td><a asp-controller="Common" asp-action="CommonFolder" asp-route-id=@folder.FolderId asp-route-ownername=@folder.Folder.User.UserName asp-route-path=@String.Concat(folder.Folder.File.Path,folder.Folder.File.Name,"\\") >@folder.Folder.File.Name</a></td>
             </tr>
         }
 
