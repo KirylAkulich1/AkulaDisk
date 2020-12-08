@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AkulaDisk.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201204055841_random1")]
-    partial class random1
+    [Migration("20201208104855_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -137,6 +137,9 @@ namespace AkulaDisk.Migrations
 
                     b.Property<int>("Type")
                         .HasColumnType("int");
+
+                    b.Property<bool>("isShared")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 

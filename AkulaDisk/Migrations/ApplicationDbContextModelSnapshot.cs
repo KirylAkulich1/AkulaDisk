@@ -324,7 +324,8 @@ namespace AkulaDisk.Migrations
                 {
                     b.HasOne("Domain.Core.SharedFolder", "Folder")
                         .WithMany("Requests")
-                        .HasForeignKey("FolderId");
+                        .HasForeignKey("FolderId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Domain.Core.ApplicationUser", "FromUser")
                         .WithMany("Sended")
@@ -346,7 +347,8 @@ namespace AkulaDisk.Migrations
                 {
                     b.HasOne("Domain.Core.FileModel", "File")
                         .WithOne("Shared")
-                        .HasForeignKey("Domain.Core.SharedFolder", "FileModelId");
+                        .HasForeignKey("Domain.Core.SharedFolder", "FileModelId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Domain.Core.ApplicationUser", "User")
                         .WithMany("OwnShared")

@@ -5,8 +5,8 @@
         <tr>
 
             <th scope="col">To</th>
-            <th scope="col">Date</th>
-            <th scope="col">Del</th>
+   
+            <th scope="col">Delete</th>
         </tr>
     </thead>
     <tbody>
@@ -15,8 +15,8 @@
             <tr>
 
                 <td>@request.ToUser.UserName</td>
-                <td>@request.Date</td>
-                <td> <a asp-controller="Common" asp-action="Delete" asp-route-id=@request.Id class="fa fa-trash-o"></a></td>
+               
+                <td> <a asp-controller="Request" asp-action="DeleteSended" asp-route-requestid=@request.Id class="fa fa-trash-o"></a></td>
 
             </tr>
         }
@@ -42,11 +42,9 @@
         var row = table.insertRow(1);
         var cell1 = row.insertCell(0);
         var cell2 = row.insertCell(1);
-        var cell3 = row.insertCell(2);
 
         cell1.innerHTML = addrequest.to;
-        cell2.innerHTML = addrequest.data;
-        cell3.innerHTML =  `<a href="Request/Delete?requestid = ${addrequest.request.toString()}" class="fa fa-ban"></a>`
+        cell2.innerHTML =  `<a href="Request/DeleteSended?requestid = ${addrequest.request.toString()}" class="fa fa-ban"></a>`
     
         });
     document.getElementById("sendBtn").addEventListener("click", function (e) {

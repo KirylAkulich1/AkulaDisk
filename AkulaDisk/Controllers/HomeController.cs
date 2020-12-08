@@ -95,7 +95,16 @@ namespace AkulaDisk.Controllers
             var file = _fileRepo.GetFile(fileid);
             _userRepo.RemoveFile(User.Identity.Name, file);
             string filePath = _appEnviroment.WebRootPath + "\\Files\\" + User.Identity.Name + path + filename;
-            _fileProc.DeleteFile(filePath);
+            try
+            {
+                _fileProc.DeleteFile(filePath);
+
+            }catch(Exception ex)
+            {
+                _errorFileLogger.LogError(ex.Message);
+                _fileLogger.LogError(ex.Message);
+                _stdoutLogger.LogError(ex.Message);
+            }
             _userRepo.SaveChanges();
             return RedirectToAction("Index", new { path = path });
         }

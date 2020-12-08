@@ -61,9 +61,16 @@ namespace Services.Implementations
 
         public async void Save(IFormFile file, string path)
         {
-            using (var fileStrem = new FileStream(path, FileMode.OpenOrCreate))
+            try
             {
-                await file.CopyToAsync(fileStrem);
+                using (var fileStrem = new FileStream(path, FileMode.OpenOrCreate))
+                {
+                    await file.CopyToAsync(fileStrem);
+                }
+            }
+            catch (Exception)
+            {
+
             }
         }
     }

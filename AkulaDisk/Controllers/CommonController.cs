@@ -39,6 +39,11 @@ namespace AkulaDisk.Controllers
             var folders=_userRepo.GetShared(User.Identity.Name);
             return View(folders);
         }
+        public IActionResult DeleteShared(string id,string fileId)
+        {
+            _sharedRepository.DeleteShared(id, fileId);
+            return RedirectToAction("Index");
+        }
         public IActionResult Other(string path = "\\")
         {
             var user = _userRepo.GetUserWithOtherSharedFolders(User.Identity.Name);

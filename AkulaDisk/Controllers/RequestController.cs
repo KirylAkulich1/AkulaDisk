@@ -56,7 +56,7 @@ namespace AkulaDisk.Controllers
                 ToEmail = "AkulaDiskSender@yandex.by",
                 Body = "Hello message"
             };
-            await _mailservice.SendEmailAsync(mailRequest);
+         //   await _mailservice.SendEmailAsync(mailRequest);
             return RedirectToAction("FolderRequest",new { fileId=folderId});
         }
         public IActionResult Income()
@@ -73,6 +73,7 @@ namespace AkulaDisk.Controllers
         public IActionResult Accept(int requestid)
         {
             var request = _reqRepo.GetRequestById(requestid);
+            request.Accepted = true;
             _sharedrepo.AddUser(request.ToUser, request.Folder);
             _sharedrepo.SaveChanges();
             return RedirectToAction("Income");
@@ -92,5 +93,6 @@ namespace AkulaDisk.Controllers
             _reqRepo.SaveChanges();
             return RedirectToAction("Sended");
         }
+    
     }
 }

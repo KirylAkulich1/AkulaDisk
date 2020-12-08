@@ -650,3 +650,62 @@ someone@gmail.com
 someone@gmail.com
 someone@gmail.com
 someone@gmail.com
+User logged in.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+someone@gmail.com
+someone@gmail.com
+someone@gmail.com
+someone@gmail.com
+someone@gmail.com
+someone@gmail.com
+someone@gmail.com
+Failed to invoke hub method 'Send'.
+Failed to invoke hub method 'Send'.
+Failed to invoke hub method 'Send'.
+Failed to invoke hub method 'Send'.
+Failed to invoke hub method 'Send'.
+Failed to invoke hub method 'Send'.
+Failed to invoke hub method 'Send'.
+someone@gmail.com
+someone@gmail.com
+someone@gmail.com
+someone@gmail.com
+someone@gmail.com
+someone@gmail.com
+someone@gmail.com
+Failed to invoke hub method 'Send'.
+Failed to invoke hub method 'Send'.
+Failed to invoke hub method 'Send'.
+Failed to invoke hub method 'Send'.
+Failed to invoke hub method 'Send'.
+Failed to invoke hub method 'Send'.
+Failed to invoke hub method 'Send'.
+User logged in.
+someone@gmail.com
+someone@gmail.com
+someone@gmail.com
+someone@gmail.com
+someone@gmail.com
+someone@gmail.com
+someone@gmail.com
+someone@gmail.com
+someone@gmail.com
+someone@gmail.com
+someone@gmail.com
+someone@gmail.com
+someone@gmail.com
+Failed to invoke hub method 'Send'.
+Failed to invoke hub method 'Send'.
+Failed to invoke hub method 'Send'.
+Failed to invoke hub method 'Send'.
+Failed to invoke hub method 'Send'.
+Failed to invoke hub method 'Send'.
+Failed to invoke hub method 'Send'.
+Failed to invoke hub method 'Send'.
+Failed to invoke hub method 'Send'.
+Failed to invoke hub method 'Send'.
+Failed to invoke hub method 'Send'.
+Failed to invoke hub method 'Send'.
+Failed to invoke hub method 'Send'.

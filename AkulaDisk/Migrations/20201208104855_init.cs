@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AkulaDisk.Migrations
 {
-    public partial class random1 : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -160,7 +160,8 @@ namespace AkulaDisk.Migrations
                     Name = table.Column<string>(nullable: true),
                     Path = table.Column<string>(nullable: true),
                     Type = table.Column<int>(nullable: false),
-                    ApplicationUserId = table.Column<string>(nullable: true)
+                    ApplicationUserId = table.Column<string>(nullable: true),
+                    isShared = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {

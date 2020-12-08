@@ -54,12 +54,13 @@ namespace AkulaDisk.SignalR
                 Subject = "Subject",
                 Attachments = new List<IFormFile>(),
                 ToEmail = "AkulaDiskSender@yandex.by",
-                Body ="Hello World" //String.Format(
-                   // "User {0} offer you request on {1}:\n" +
-                    //"To accept follow link: {2}/Request/AddRequest/?fileid={3} username={4}} \n" +
-                    //"To deny follow link:  {2}/Request/AddRequest/?fileid={3} username={4}}")
+                Body = $"Click: <a href='https://akuladisk20201119113753.azurewebsites.net/Request/Accept/?requestid={request.Id}'>Accept</a>.<p>" +
+               $"<a href = 'https://akuladisk20201119113753.azurewebsites.net/Request/Deny/?requestid={request.Id}' >Deny</a>. " //String.Format(
+                // "User {0} offer you request on {1}:\n" +
+                //"To accept follow link: {2}/Request/AddRequest/?fileid={3} username={4}} \n" +
+                //"To deny follow link:  {2}/Request/AddRequest/?fileid={3} username={4}}")
             };
-            //await _mailService.SendEmailAsync(mailRequest);
+            await _mailService.SendEmailAsync(mailRequest);
             await Clients.User(message.To).SendAsync("Recieve", tr);
             await Clients.Caller.SendAsync("Sended", tr);
         }

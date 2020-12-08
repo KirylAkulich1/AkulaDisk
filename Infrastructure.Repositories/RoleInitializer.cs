@@ -23,8 +23,9 @@ namespace Infrastructure.Repositories
             }
             if (await userManager.FindByNameAsync(adminEmail) == null)
             {
-                ApplicationUser admin = new ApplicationUser { Email = adminEmail, UserName = adminEmail };
+                ApplicationUser admin = new ApplicationUser { Email = adminEmail, UserName = adminEmail,EmailConfirmed=true };
                 IdentityResult result = await userManager.CreateAsync(admin, password);
+               
                 if (result.Succeeded)
                 {
                     await userManager.AddToRoleAsync(admin, "admin");

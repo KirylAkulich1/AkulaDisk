@@ -4,7 +4,7 @@
         <tr>
             <th scope="col">Folder</th>
             <th scope="col">Sender</th>
-            <th scope="col">Data</th>
+           
             <th scope="col">Yes</th>
             <th scope="col">No</th>
         </tr>
@@ -12,12 +12,21 @@
     <tbody>
         @foreach (var request in Model)
         {
-            <tr>
+        <tr>
 
-                <td>@request.Name</td>
-                <td>@request.FromUser.UserName</td>
-                <td>@request.Date</td>
-                <td> <a asp-controller="Request" asp-action="Accept" asp-route-requestid=@request.Id class="fa fa-check"></a></td>
+            <td>@request.Name</td>
+            <td>@request.FromUser.UserName</td>
+           
+            <td>
+                @if (!request.Accepted)
+                {
+                    <a asp-controller="Request" asp-action="Accept" asp-route-requestid=@request.Id class="fa fa-check"></a>
+                
+            }
+            else
+            {
+                <i class="fa fa-check"></i>
+            }</td>
                 <td> <a asp-controller="Request" asp-action="Deny" asp-route-requestid=@request.Id class="fa fa-ban"></a></td>
             </tr>
         }
@@ -33,7 +42,7 @@
             .build();
     hubConnection.on("Notify", function (message) {
         let elem = document.createElement("p");
-        elem.appendChild(document.createTextNode("!!!"));
+        //elem.appendChild(document.createTextNode("!!!"));
         var firstElem = document.getElementById("chatroom").firstChild;
         document.getElementById("chatroom").insertBefore(elem, firstElem);
     });
@@ -52,13 +61,13 @@
         var cell2 = row.insertCell(1);
         var cell3 = row.insertCell(2);
         var cell4 = row.insertCell(3);
-        var cell5 = row.insertCell(4);
+       
 
         cell2.innerHTML = addrequest.from;
         cell1.innerHTML = addrequest.name;
-        cell3.innerHTML = addrequest.data;
-        cell4.innerHTML = ` <a href="Request/Accept?requestid =${addrequest.request.toString()}" class="fa fa-check"></a>`;
-        cell5.innerHTML = ` <a href="Request/Accept?requestid = ${ addrequest.request.toString()}" class="fa fa-ban"></a>`;
+
+        cell3.innerHTML = ` <a href="Request/Accept?requestid =${addrequest.request.toString()}" class="fa fa-check"></a>`;
+        cell4.innerHTML = ` <a href="Request/Accept?requestid = ${ addrequest.request.toString()}" class="fa fa-ban"></a>`;
      //   let elem = document.createElement("p");
       //  elem.appendChild(document.createTextNode("!!!!!"));
        // var firstElem = document.getElementById("chatroom").firstChild;

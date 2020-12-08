@@ -4,7 +4,7 @@
         <tr>
             <th scope="col">Folder</th>
             <th scope="col">Sender</th>
-            <th scope="col">Data</th>
+           
             <th scope="col">Delete</th>
         </tr>
     </thead>
@@ -15,8 +15,7 @@
 
                 <td>@request.Name</td>
                 <td>@request.FromUser.UserName</td>
-                <td>@request.Date</td>
-                <td> <a asp-controller="Request" asp-action="Deny" asp-route-requestid=@request.Id class="fa fa-ban"></a></td>
+                <td> <a asp-controller="Request" asp-action="DeleteSended" asp-route-requestid=@request.Id class="fa fa-ban"></a></td>
 
             </tr>
         }

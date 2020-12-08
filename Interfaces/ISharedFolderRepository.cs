@@ -12,6 +12,7 @@ namespace Domain.Interfaces
         IEnumerable<AddRequest> GetRelatedRequests(string SharedId);
         void AddUser(ApplicationUser user,SharedFolder folder);
         bool IsUserHasAccess(string userName, string folderId);
+        void DeleteShared(string sharedId, string fileId);
         void SaveChanges();
         
     }

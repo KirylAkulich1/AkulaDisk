@@ -20,7 +20,18 @@ namespace Infrastructure.Repositories
 
         public void DeleteRequest(AddRequest req)
         {
+            var request = _context.AddRequests
+                .Include(p => p.ToUser)
+                .Include(p => p.Folder)
+                .Single(p => p.Id == req.Id);
+            if (request.Accepted)
+            {
+                var sharedUser = _context.SharedUsers.Single(p => p.FolderId == req.FolderId && p.UserId == req.ToId);
+                _context.SharedUsers.Remove(sharedUser);
+            }
             _context.AddRequests.Remove(req);
+            
+            
         }
 
         public AddRequest GetRequestById(int id)

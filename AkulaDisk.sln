@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AkulaDisk", "AkulaDisk\AkulaDisk.csproj", "{81FE329C-179A-4F4A-AE0C-D21D10EAB4DA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataLayer", "DataLayer\DataLayer.csproj", "{23635D9B-2760-4055-B93B-909FD3C6A8EC}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{12979489-A5D6-4DB2-8E18-426716260B3A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Core", "Core\Domain.Core.csproj", "{2F0C86E2-C370-4923-82E0-39B6A705C317}"
@@ -25,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.Interfaces", "Serv
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.Implementations", "Services.Implementations\Services.Implementations.csproj", "{1EB6C4AB-6F88-4626-BFF0-FCA60235CFF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkulaDisk.Tests", "AkulaDisk.Tests\AkulaDisk.Tests.csproj", "{9D72B25B-CBAD-44A9-A2D2-EC17E587EABC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AkulaDisk.Tests", "AkulaDisk.Tests\AkulaDisk.Tests.csproj", "{9D72B25B-CBAD-44A9-A2D2-EC17E587EABC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,10 +35,6 @@ Global
 		{81FE329C-179A-4F4A-AE0C-D21D10EAB4DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81FE329C-179A-4F4A-AE0C-D21D10EAB4DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81FE329C-179A-4F4A-AE0C-D21D10EAB4DA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{23635D9B-2760-4055-B93B-909FD3C6A8EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{23635D9B-2760-4055-B93B-909FD3C6A8EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{23635D9B-2760-4055-B93B-909FD3C6A8EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{23635D9B-2760-4055-B93B-909FD3C6A8EC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2F0C86E2-C370-4923-82E0-39B6A705C317}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2F0C86E2-C370-4923-82E0-39B6A705C317}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F0C86E2-C370-4923-82E0-39B6A705C317}.Release|Any CPU.ActiveCfg = Release|Any CPU

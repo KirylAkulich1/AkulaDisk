@@ -31,8 +31,9 @@ namespace Infrastructure.Data
             builder.Entity<SharedFolder>()
                 .HasOne(p => p.File)
                 .WithOne(s => s.Shared)
-                .HasForeignKey<SharedFolder>(p=>p.FileModelId);
-                
+                .HasForeignKey<SharedFolder>(p => p.FileModelId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             builder.Entity<SharedUser>().HasKey(p => new { p.UserId, p.FolderId });
             builder.Entity<SharedUser>().
                 HasOne(p => p.Folder).
@@ -56,8 +57,9 @@ namespace Infrastructure.Data
             builder.Entity<SharedFolder>()
                 .HasMany(p => p.Requests)
                 .WithOne(p => p.Folder)
-                .HasForeignKey(p => p.FolderId);
-                
+                .HasForeignKey(p => p.FolderId)
+                .OnDelete(DeleteBehavior.Cascade);
+
 
         }
     }

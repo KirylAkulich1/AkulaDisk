@@ -7,6 +7,11 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Services.Interfaces;
+using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
+using System;
+using System.Text.Encodings.Web;
 
 namespace AkulaDisk.Areas.Identity.Pages.Account
 {
@@ -15,11 +20,13 @@ namespace AkulaDisk.Areas.Identity.Pages.Account
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmailSender _sender;
+        private readonly IMailService _mailService;
 
-        public RegisterConfirmationModel(UserManager<ApplicationUser> userManager, IEmailSender sender)
+        public RegisterConfirmationModel(UserManager<ApplicationUser> userManager, IEmailSender sender, IMailService mailService)
         {
             _userManager = userManager;
             _sender = sender;
+            _mailService = mailService;
         }
 
         public string Email { get; set; }
@@ -54,6 +61,19 @@ namespace AkulaDisk.Areas.Identity.Pages.Account
                     pageHandler: null,
                     values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                     protocol: Request.Scheme);
+                MailRequest mailRequest = new MailRequest
+                {
+                    Subject = "Subject",
+                    Attachments = new List<IFormFile>(),
+                    ToEmail = "AkulaDiskSender@yandex.by",
+                    Body =
+                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(EmailConfirmationUrl)}'>clicking here</a>." //String.Format(
+                                         // "User {0} offer you request on {1}:\n" +
+                                         //"To accept follow link: {2}/Request/AddRequest/?fileid={3} username={4}} \n" +
+                                         //"To deny follow link:  {2}/Request/AddRequest/?fileid={3} username={4}}")
+                };
+                await _mailService.SendEmailAsync(mailRequest);
+
             }
 
             return Page();

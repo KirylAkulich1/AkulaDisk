@@ -47,13 +47,7 @@ namespace AkulaDisk
             services.AddControllersWithViews();
             services.AddRazorPages();
             string connection;
-            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
-            {
-                connection = Configuration.GetConnectionString("AzureConnection");
-                services.AddSignalR()
-                .AddAzureSignalR(Configuration.GetValue<string>("SignalRSercet"));
-            }
-            else
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
             {
                 services.AddSignalR();
                 connection = Configuration.GetConnectionString("DefaultConnection");
@@ -61,6 +55,13 @@ namespace AkulaDisk
                     options.SwaggerDoc("v1",
                     new OpenApiInfo { Title = "WebApp", Version = "v1" });
                 });
+              
+            }
+            else
+            {
+                connection = Configuration.GetConnectionString("AzureConnection");
+                services.AddSignalR()
+                .AddAzureSignalR(Configuration.GetValue<string>("SignalRSercet"));
             }
            // services.BuildServiceProvider().GetService<ApplicationDbContext>().Database.Migrate();
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -68,8 +69,17 @@ namespace AkulaDisk
             //   services.AddDbContext<FileContext>(options =>
             //     options.UseSqlServer(connection, b => b.MigrationsAssembly("AkulaDisk")));
             services.AddDefaultIdentity<ApplicationUser>(options => {
-                options.SignIn.RequireConfirmedAccount = false;
-            // options.SignIn.RequireConfirmedEmail = true;
+                if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+                {
+                    options.SignIn.RequireConfirmedAccount = false;
+                    options.SignIn.RequireConfirmedEmail = false;
+                   
+                }
+                else
+                {
+                    options.SignIn.RequireConfirmedAccount = true;
+                    options.SignIn.RequireConfirmedEmail = true;
+                }
             })
                 .AddRoles<IdentityRole>()
                .AddEntityFrameworkStores<ApplicationDbContext>();

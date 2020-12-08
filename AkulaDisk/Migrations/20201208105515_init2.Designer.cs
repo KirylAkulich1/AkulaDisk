@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AkulaDisk.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201207192322_auth")]
-    partial class auth
+    [Migration("20201208105515_init2")]
+    partial class init2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -326,7 +326,8 @@ namespace AkulaDisk.Migrations
                 {
                     b.HasOne("Domain.Core.SharedFolder", "Folder")
                         .WithMany("Requests")
-                        .HasForeignKey("FolderId");
+                        .HasForeignKey("FolderId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Domain.Core.ApplicationUser", "FromUser")
                         .WithMany("Sended")
@@ -348,7 +349,8 @@ namespace AkulaDisk.Migrations
                 {
                     b.HasOne("Domain.Core.FileModel", "File")
                         .WithOne("Shared")
-                        .HasForeignKey("Domain.Core.SharedFolder", "FileModelId");
+                        .HasForeignKey("Domain.Core.SharedFolder", "FileModelId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Domain.Core.ApplicationUser", "User")
                         .WithMany("OwnShared")

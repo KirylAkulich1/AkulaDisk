@@ -30,6 +30,18 @@ namespace Infrastructure.Repositories
             folder.Users.Add(sharedUser);
         }
 
+        public void DeleteShared(string sharedId, string fileId)
+        {
+            var shared = db.SharedFolders.Include(p => p.Requests)
+                .Include(p => p.Users)
+                .Include(p=>p.File).First(p=>p.Id==sharedId);
+            shared.File.isShared = false;
+            db.SharedFolders.Remove(shared);
+            db.SaveChanges();
+
+
+        }
+
         public SharedFolder GetFolderById(string SharedId)
         {
             return db.SharedFolders
