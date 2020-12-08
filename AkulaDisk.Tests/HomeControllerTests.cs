@@ -119,7 +119,7 @@ namespace AkulaDisk.Tests
             var controller = new HomeController(new Mock<IWebHostEnvironment>().Object,
                new FakeFileProcessor(), new Mock<ILoggerFactory>().Object,
                new FakeRepository(),
-               new Mock<IFileRepository>().Object
+                new FakeRepository()
                );
             controller.ControllerContext = new ControllerContext();
             controller.ControllerContext.HttpContext = new DefaultHttpContext { User = user };

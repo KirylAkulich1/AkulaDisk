@@ -1,5 +1,6 @@
 ﻿using Domain.Core;
 using Domain.Interfaces;
+using Interfaces;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace AkulaDisk.Tests
 {
-    class FakeRepository : IUserRepository
+    class FakeRepository : IUserRepository,IFileRepository
     {
         Dictionary<String, ApplicationUser> _users = new Dictionary<string, ApplicationUser>
         {
@@ -48,9 +49,39 @@ namespace AkulaDisk.Tests
             _users[userName].Sended.Add(req);
         }
 
+        public void Create(FileModel file)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
+        public FileModel GetFile(string id)
+        {
+            return new FileModel {Id=id };
+        }
+
+        public IEnumerable<FileModel> GetFileList()
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<FileModel> GetFiles(string UsrName, string path)
         {
             return _files.Values;
+        }
+
+        public IEnumerable<FileModel> GetFilesbyPath(string path)
+        {
+            throw new NotImplementedException();
         }
 
         public IEnumerable<AddRequest> GetInputRequests(string UserName)
@@ -85,14 +116,29 @@ namespace AkulaDisk.Tests
             throw new NotImplementedException();
         }
 
+        public void MakeShared(string id, SharedFolder folder)
+        {
+           
+        }
+
         public void RemoveFile(string UserName, FileModel fm)
         {
            
         }
 
+        public void Save()
+        {
+            throw new NotImplementedException();
+        }
+
         public void SaveChanges()
         {
             
+        }
+
+        public void Update(FileModel file)
+        {
+            throw new NotImplementedException();
         }
     }
 }
