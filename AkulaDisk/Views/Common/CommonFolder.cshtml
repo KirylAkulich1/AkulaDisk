@@ -40,11 +40,11 @@
                     }
                     else
                     {
-                        <a asp-controller="Common" asp-action="Download" asp-route-id=@ViewBag.CurrentId asp-route-ownername=@file.Owner.UserName asp-route-path=@file.Path class="fa fa-download"></a>
+                        <a asp-controller="Common" asp-action="Download" asp-route-folderId=@ViewBag.CurrentId asp-route-ownername=@file.Owner.UserName asp-route-path=@file.Path asp-route-filename=@file.Name class="fa fa-download"></a>
                     }
                 </td>
                 <td>
-                    <a class="fa fa-trash-o" asp-controller="Common" asp-action="Delete" asp-route-id=@file.Id asp-route-ownername=@file.Owner.UserName asp-route-path=@file.Path></a>
+                    <a class="fa fa-trash-o" asp-controller="Common" asp-action="Delete" asp-route-folderId=@ViewBag.CurrentId asp-route-ownername=@file.Owner.UserName asp-route-path=@file.Path asp-route-filename=@file.Name></a>
                 </td>
                
 

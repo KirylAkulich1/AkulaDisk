@@ -6,6 +6,7 @@ using Domain.Core;
 using Domain.Interfaces;
 using Interfaces;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Services.Interfaces;
 
@@ -18,14 +19,17 @@ namespace AkulaDisk.Controllers
         private IRequestRepository _reqRepo;
         private ISharedFolderRepository _sharedrepo;
         private IMailService _mailservice;
+        private SignInManager<ApplicationUser> _signInManager;
         public RequestController(IFileRepository fileRepo,IUserRepository userRepo,
-            IRequestRepository reqRepo,ISharedFolderRepository sharedRepo,IMailService mailservice)
+            IRequestRepository reqRepo,ISharedFolderRepository sharedRepo,IMailService mailservice,
+            SignInManager<ApplicationUser> signInManager)
         {
             _fileRepo = fileRepo;
             _userRepo = userRepo;
             _reqRepo = reqRepo;
             _sharedrepo = sharedRepo;
             _mailservice = mailservice;
+            _signInManager = signInManager;
         }
         public IActionResult Index()
         {
@@ -93,6 +97,18 @@ namespace AkulaDisk.Controllers
             _reqRepo.SaveChanges();
             return RedirectToAction("Sended");
         }
-    
+        public async Task<IActionResult> Logout(string returnUrl = null)
+        {
+            await _signInManager.SignOutAsync();
+            if (returnUrl != null)
+            {
+                return LocalRedirect(returnUrl);
+            }
+            else
+            {
+                return View();
+            }
+        }
+
     }
 }

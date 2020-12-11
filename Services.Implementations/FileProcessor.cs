@@ -61,17 +61,11 @@ namespace Services.Implementations
 
         public async void Save(IFormFile file, string path)
         {
-            try
-            {
                 using (var fileStrem = new FileStream(path, FileMode.OpenOrCreate))
                 {
                     await file.CopyToAsync(fileStrem);
                 }
-            }
-            catch (Exception)
-            {
 
-            }
         }
     }
 }

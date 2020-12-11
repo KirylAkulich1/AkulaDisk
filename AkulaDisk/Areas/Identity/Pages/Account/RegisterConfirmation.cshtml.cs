@@ -65,7 +65,7 @@ namespace AkulaDisk.Areas.Identity.Pages.Account
                 {
                     Subject = "Subject",
                     Attachments = new List<IFormFile>(),
-                    ToEmail = "AkulaDiskSender@yandex.by",
+                    ToEmail =Email,
                     Body =
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(EmailConfirmationUrl)}'>clicking here</a>." //String.Format(
                                          // "User {0} offer you request on {1}:\n" +

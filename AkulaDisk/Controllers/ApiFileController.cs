@@ -81,7 +81,8 @@ namespace AkulaDisk.Controllers
                 string path = Path.Combine(Directory.GetCurrentDirectory(),"wwwroot","Files", model.UserName, model.Path);
                 if (!Directory.Exists(Directory.GetCurrentDirectory() + "\\Zips\\" + model.UserName))
                     Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\Zips\\" + model.UserName);
-                ZipFile.CreateFromDirectory(path, Directory.GetCurrentDirectory()+"\\Zips\\"+model.UserName+"\\zip.zip");
+                
+                ZipFile.CreateFromDirectory(path, Directory.GetCurrentDirectory()+"\\Zips\\"+model.UserName+"\\zip123.zip");
                 return PhysicalFile(Directory.GetCurrentDirectory() + "\\Zips\\" + model.UserName + "\\zip.zip", "application/force-download", "zip.zip");
             }
         }

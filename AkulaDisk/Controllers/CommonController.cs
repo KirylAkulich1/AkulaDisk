@@ -92,29 +92,39 @@ namespace AkulaDisk.Controllers
         {
             var userName = User.Identity.Name;
             bool hasAccess = _sharedRepository.IsUserHasAccess(userName, id);
-            var file = _fileRepo.GetFile(fileId);
-            _userRepo.RemoveFile(User.Identity.Name, file);
-            string filePath = _appEnviroment.WebRootPath + "\\Files\\" + User.Identity.Name + path + file.Name;
-            _fileProc.DeleteFile(filePath);
-            _userRepo.SaveChanges();
+            if (hasAccess)
+            {
+                var file = _fileRepo.GetFile(fileId);
+                _userRepo.RemoveFile(User.Identity.Name, file);
+                string filePath = _appEnviroment.WebRootPath + "\\Files\\" + User.Identity.Name + path + file.Name;
+                _fileProc.DeleteFile(filePath);
+                _userRepo.SaveChanges();
+            }
             return RedirectToAction("Index", new {id=id,ownername=ownername, path = path });
         }
     
-        public IActionResult Download(string filename, string path)
+        public IActionResult Download(string folderId,string ownername,string filename, string path)
         {
             var userName = User.Identity.Name;
             bool hasAccess = _sharedRepository.IsUserHasAccess(userName, folderId);
-            string filePath = _appEnviroment.WebRootPath + "\\Files\\" + User.Identity.Name + path + filename;
+            string filePath = "";
+            if (hasAccess)
+            {
+                filePath = _appEnviroment.WebRootPath + "\\Files\\" + ownername + path + filename;
+            }
             return PhysicalFile(filePath, "application/force-download", filename);
         }
-        public IActionResult Delete(string filename, string path, string fileid)
+        public IActionResult Delete(string folderId, string ownername, string filename, string path)
         {
             var userName = User.Identity.Name;
             bool hasAccess = _sharedRepository.IsUserHasAccess(userName, folderId);
-            var file = _fileRepo.GetFile(fileid);
-            _userRepo.RemoveFile(User.Identity.Name, file);
-            string filePath = _appEnviroment.WebRootPath + "\\Files\\" + User.Identity.Name + path + filename;
-            _fileProc.DeleteFile(filePath);
+            if (hasAccess)
+            {
+                var file = _fileRepo.GetFile(folderId);
+                _userRepo.RemoveFile(ownername, file);
+                string filePath = _appEnviroment.WebRootPath + "\\Files\\" + ownername + path + filename;
+                _fileProc.DeleteFile(filePath);
+            }
             return RedirectToAction("Index", new { path = path });
         }
     }

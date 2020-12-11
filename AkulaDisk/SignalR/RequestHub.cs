@@ -53,7 +53,7 @@ namespace AkulaDisk.SignalR
             {
                 Subject = "Subject",
                 Attachments = new List<IFormFile>(),
-                ToEmail = "AkulaDiskSender@yandex.by",
+                ToEmail = message.To,
                 Body = $"Click: <a href='https://akuladisk20201119113753.azurewebsites.net/Request/Accept/?requestid={request.Id}'>Accept</a>.<p>" +
                $"<a href = 'https://akuladisk20201119113753.azurewebsites.net/Request/Deny/?requestid={request.Id}' >Deny</a>. " //String.Format(
                 // "User {0} offer you request on {1}:\n" +

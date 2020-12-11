@@ -709,3 +709,17 @@ Failed to invoke hub method 'Send'.
 Failed to invoke hub method 'Send'.
 Failed to invoke hub method 'Send'.
 Failed to invoke hub method 'Send'.
+User logged in.
+admin@gmail.com
+admin@gmail.com
+admin@gmail.com
+admin@gmail.com
+admin@gmail.com
+admin@gmail.com
+Failed to invoke hub method 'Send'.
+Failed to invoke hub method 'Send'.
+Failed to invoke hub method 'Send'.
+Failed to invoke hub method 'Send'.
+Failed to invoke hub method 'Send'.
+Failed to invoke hub method 'Send'.
+An unhandled exception has occurred while executing the request.
